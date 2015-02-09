@@ -1,0 +1,14 @@
+﻿Build started 2/9/2015 2:39:38 PM.
+     1>Project "C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\FMODTests\FMODTests.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc" /AI"C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+     1>c:\users\student\documents\visual studio 2013\projects\fmodtests\test1\fmodtests\main.cpp(13): warning C4101: 'result' : unreferenced local variable
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\Debug\FMODTests.exe" /INCREMENTAL /NOLOGO fmodex_vc.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\Debug\FMODTests.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\Debug\FMODTests.lib" /MACHINE:X86 Debug\Main.obj
+         FMODTests.vcxproj -> C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\Debug\FMODTests.exe
+     1>Done Building Project "C:\Users\student\Documents\Visual Studio 2013\Projects\FMODTests\Test1\FMODTests\FMODTests.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.19
