@@ -5,6 +5,9 @@
 #include <array>
 #include <math.h>
 
+void quickSort(std::vector<float>& a, int l, int r);
+int partition(std::vector<float>& a, int l, int r);
+
 int main()
 {
 	FMOD::System *system;
@@ -14,6 +17,7 @@ int main()
 
 	int sampleSize = 1024;
 	int test;
+	float volume;
 	float sampleRate;
 	unsigned int seconds;
 	unsigned int minutes;
@@ -21,18 +25,18 @@ int main()
 	float* previousFFT;
 	float specFlux=0.0;
 	float difference;
+	unsigned int timeBetween = 0;
 
 	FMOD::Sound *audio;
 	FMOD::ChannelGroup *channelMusic;
 	FMOD::Channel *songChannel1;
 
 	FMODErrorCheck(system->createChannelGroup(NULL, &channelMusic));
-	FMODErrorCheck(system->createSound("Sound/cochice.mp3", FMOD_SOFTWARE, 0, &audio));
+	FMODErrorCheck(system->createSound("Sound/drums.wav", FMOD_SOFTWARE, 0, &audio));
 
 	audio->getLength(&seconds, FMOD_TIMEUNIT_MS);
-	audio->getDefaults(&sampleRate, 0, 0, 0);
+	audio->getDefaults(&sampleRate, &volume, 0, 0);
 	seconds = ((seconds + 500) / 1000);
-
 	minutes = seconds / 60;
 	seconds = seconds - (minutes * 60);
 
@@ -45,6 +49,11 @@ int main()
 	float hzRange = (44100 / 2) / static_cast<float>(sampleSize);
 
 	std::vector<float> spectrumFluxes;
+	std::vector<float> smootherValues;
+	float median = 0.0;
+	float smoothMedian = 0.0;
+	float beatThreshold = 0.6f;
+	float thresholdSmoother = 0.6f;
 
 	std::cout << "Song Length: " << minutes << ":" << seconds << std::endl;
 	std::cout << "Sample Rate: " << sampleRate << std::endl;
@@ -86,30 +95,76 @@ int main()
 			if (difference > 0) {
 				specFlux += difference;
 			}
-
-			spectrumFluxes.push_back(specFlux);
-
-			if (spectrumFluxes.size()>15)			{				spectrumFluxes.erase(spectrumFluxes.begin());			}
 		}
 
-		//Accuracy
-		/*for (int i = 0; i < thresholdValues.size(); i++)
+		//specFlux /= (sampleSize / 2 + 1);
+
+		//Get our median for threshold
+		if (spectrumFluxes.size() > 0 && spectrumFluxes.size()<10)
 		{
-			if (thresholdValues.at(i) <= spectrumFluxes.at(i))
-				accurateSpectrumFluxes.push_back(spectrumFluxes.at(i) - thresholdValues.at(i));
-			else
-				accurateSpectrumFluxes.push_back((float)0);
-		}*/
 
-		specFlux /= sampleSize / 2;
+			std::sort(spectrumFluxes.begin(), spectrumFluxes.end());
+			//quickSort(spectrumFluxes, 0, spectrumFluxes.size() - 1);
+			std::sort(smootherValues.begin(), smootherValues.end());
+			if (spectrumFluxes.at(spectrumFluxes.size() / 2) > 0)
+			{
+				median = spectrumFluxes.at(spectrumFluxes.size() / 2);
+			}
 
+			if (smootherValues.size() > 0 && smootherValues.size() < 5)
+			{
+
+				if (smootherValues.at(smootherValues.size() / 2) > 0)
+				{
+					smoothMedian = smootherValues.at(smootherValues.size() / 2);
+				}
+			}
+			//std::cout << median << std::endl;
+		}
+
+		//Copy spectrum for next spectral flux calculation
 		for (int j = 0; j < sampleSize / 2; j++)
 			previousFFT[j] = specStereo[j];
 
-		if (specFlux > 0.001)
-			//std::cout << specStereo[0] << std::endl;
 
-			//std::cout << specFlux << std::endl;
+		if (smoothMedian > 1)
+			thresholdSmoother = 0.8f;
+		if (smoothMedian > 2 && smoothMedian < 4)
+			thresholdSmoother = 1.0f;
+		if (smoothMedian > 4 && smoothMedian < 6)
+			thresholdSmoother = 2.5f;
+		if (smoothMedian > 6)
+			thresholdSmoother = 2.9f;
+
+		//Calculate our adaptive threshold
+		beatThreshold = thresholdSmoother + median;
+		
+		//std::cout << specFlux << std::endl;
+		//Beat detected
+		if (specFlux > beatThreshold && (GetTickCount()-timeBetween)>350)
+		{
+			smootherValues.push_back(specFlux);
+
+			if (smootherValues.size() >= 5)
+			{
+				smootherValues.erase(smootherValues.begin());
+			}
+
+			timeBetween = GetTickCount();
+			std::cout << "BEAT FREQ: " << specFlux << " THRESHOLD:" << beatThreshold << " MEDIAN:" << median << std::endl;
+		}
+
+
+		
+		for (int i = 0; i < sampleSize / 2; i++)
+		{
+			spectrumFluxes.push_back(specFlux);
+
+			if (spectrumFluxes.size()>=10)
+			{
+				spectrumFluxes.erase(spectrumFluxes.begin());
+			}
+		}
 
 		songChannel1->isPlaying(&areWePlaying);
 
@@ -123,4 +178,46 @@ int main()
 
 	std::cin >> test;
 
+}
+
+void quickSort(std::vector<float>& unsorted, int l, int r)
+{
+	int j;
+
+	if (l < r)
+	{
+		j = partition(unsorted, l, r);
+		quickSort(unsorted, l, j - 1);
+		quickSort(unsorted, j + 1, r);
+	}
+
+}
+
+
+
+int partition(std::vector<float>& passedIn, int l, int r) 
+{
+	float pivot;
+	float t;
+	int i, j;
+	pivot = passedIn.at(l);
+	i = l; j = r - 1;
+
+	while (1)
+	{
+		
+		while (i <= r && passedIn.at(i) <= pivot)
+		{
+			i++;
+		}
+		while (passedIn.at(j) > pivot)
+		{
+			j--;
+		}
+		if (i >= j) break;
+
+		t = passedIn.at(i); passedIn.at(i) = passedIn.at(j); passedIn.at(j) = t;
+	}
+	t = passedIn.at(l); passedIn.at(l) = passedIn.at(j); passedIn.at(j) = t;
+	return j;
 }
