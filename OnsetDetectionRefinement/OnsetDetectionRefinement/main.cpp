@@ -31,8 +31,14 @@ int main()
 	FMOD::ChannelGroup *channelMusic;
 	FMOD::Channel *songChannel1;
 
+	DWORD initialTime = GetTickCount();
+	DWORD currentTime = 0;
+	DWORD currentMillis = 0;
+	DWORD currentSeconds = 0;
+	DWORD currentMinutes = 0;
+
 	FMODErrorCheck(system->createChannelGroup(NULL, &channelMusic));
-	FMODErrorCheck(system->createSound("Sound/drums.wav", FMOD_SOFTWARE, 0, &audio));
+	FMODErrorCheck(system->createSound("Sound/gangam.mp3", FMOD_SOFTWARE, 0, &audio));
 
 	audio->getLength(&seconds, FMOD_TIMEUNIT_MS);
 	audio->getDefaults(&sampleRate, &volume, 0, 0);
@@ -69,6 +75,19 @@ int main()
 	while (areWePlaying)
 	{
 
+		//Get Time
+		currentTime = GetTickCount();
+		currentTime = currentTime - initialTime;
+
+		if (currentMinutes>0)
+			currentSeconds = ((currentTime / 1000) - (60*currentMinutes));
+		else
+			currentSeconds = (currentTime / 1000);
+
+		currentMinutes = ((currentTime / 1000) / 60);
+
+
+
 		specFlux = 0.0;
 		float *specLeft, *specRight, *specStereo;
 
@@ -102,10 +121,10 @@ int main()
 		//Get our median for threshold
 		if (spectrumFluxes.size() > 0 && spectrumFluxes.size()<10)
 		{
-
 			std::sort(spectrumFluxes.begin(), spectrumFluxes.end());
 			//quickSort(spectrumFluxes, 0, spectrumFluxes.size() - 1);
 			std::sort(smootherValues.begin(), smootherValues.end());
+
 			if (spectrumFluxes.at(spectrumFluxes.size() / 2) > 0)
 			{
 				median = spectrumFluxes.at(spectrumFluxes.size() / 2);
@@ -151,9 +170,8 @@ int main()
 			}
 
 			timeBetween = GetTickCount();
-			std::cout << "BEAT FREQ: " << specFlux << " THRESHOLD:" << beatThreshold << " MEDIAN:" << median << std::endl;
+			std::cout  << "BEAT AT: "<< currentMinutes << ":" << currentSeconds  << " -- BEAT FREQ: " << specFlux << " -- THRESHOLD:" << beatThreshold << std::endl;
 		}
-
 
 		
 		for (int i = 0; i < sampleSize / 2; i++)
@@ -168,7 +186,6 @@ int main()
 
 		songChannel1->isPlaying(&areWePlaying);
 
-		
 		// Memory management
 		delete[] specStereo;
 		delete[] specLeft;
