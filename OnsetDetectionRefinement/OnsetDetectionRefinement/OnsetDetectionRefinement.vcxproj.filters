@@ -13,30 +13,81 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\OnsetDetection">
+      <UniqueIdentifier>{83349a79-5d3a-4080-ae44-3c6dd822d961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{d595ea62-9a67-427a-8e1c-912530b3c454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{18ffd788-508f-4acb-9775-27a970b6ffa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OnsetDetection">
+      <UniqueIdentifier>{c2c3da22-c1a6-464f-9efd-49c619b8d532}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BeatDetector.h">
+      <Filter>Header Files\OnsetDetection</Filter>
+    </ClInclude>
     <ClInclude Include="FMODErrorCheck.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OnsetDetection</Filter>
     </ClInclude>
     <ClInclude Include="FMODSetup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BeatDetector.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OnsetDetection</Filter>
     </ClInclude>
     <ClInclude Include="TimeStamp.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OnsetDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BeatDetector.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OnsetDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\OnsetDetection</Filter>
     </ClCompile>
     <ClCompile Include="TimeStamp.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OnsetDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
