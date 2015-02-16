@@ -68,11 +68,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BeatDetector.h" />
     <ClInclude Include="FMODErrorCheck.h" />
     <ClInclude Include="FMODSetup.h" />
+    <ClInclude Include="TimeStamp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BeatDetector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TimeStamp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,9 +21,21 @@
     <ClInclude Include="FMODSetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BeatDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeStamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BeatDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeStamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

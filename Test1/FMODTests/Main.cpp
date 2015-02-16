@@ -47,13 +47,11 @@ int main()
 	audio->getLength(&seconds, FMOD_TIMEUNIT_MS);
 	audio->getDefaults(&sampleRate, 0,0,0);
 	seconds = ((seconds + 500) / 1000);
-
 	minutes = seconds / 60;
 	seconds = seconds - (minutes * 60);
 
 	FMODErrorCheck(system->playSound(FMOD_CHANNEL_FREE, audio, true, &songChannel1));
 
-	
 	songChannel1->setChannelGroup(channelMusic);
 	songChannel1->setPaused(false);
 
