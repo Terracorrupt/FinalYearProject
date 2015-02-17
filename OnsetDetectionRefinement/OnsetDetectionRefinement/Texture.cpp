@@ -37,7 +37,7 @@ void Texture::Update()
 // draw image to screen/single image
 void Texture::Draw(Vector2D* position, SDL_RendererFlip flip)
 {
-	srcRect.x = width *currentFrame;
+	srcRect.x = 0;
 	srcRect.y = 0;
 	srcRect.w = destRect.w = width;
 	srcRect.h = destRect.h = height;

@@ -1,23 +1,31 @@
 #include "Menu.h"
 
-Menu::Menu(SDL_Renderer* r)
+Menu::Menu(SDL_Renderer* r, ContentManager* c)
 {
-	//m = new Obstacle(r);
-	//m->Load("images/menu.png", "4", 200.0f, 100.0f, 800, 600);
+	conMan = c;
+
+	player = new Player(conMan);
+	player->Load();
 
 	DEBUG_MSG("Menu Created");
 }
 
 Menu::~Menu()
 {
-	//delete m;
+	delete player;
 }
 void Menu::Update()
 {
-	//m->Update();
+	//conMan->Update();
+	player->Update();
 }
 
 void Menu::Draw()
 {
-	//m->Draw();
+	player->Draw();
+}
+
+void Menu::Event()
+{
+	player->HandleEvents();
 }

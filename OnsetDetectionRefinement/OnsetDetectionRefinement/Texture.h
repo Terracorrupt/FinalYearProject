@@ -23,8 +23,6 @@ public:
 	void setRow(int);
 	int getWidth();
 	int getHeight();
-
-private:
 	int width;
 	int height;
 	int frameCount;

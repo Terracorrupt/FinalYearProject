@@ -6,11 +6,13 @@
 class Menu : public Scene
 {
 public:
-	Menu(SDL_Renderer*);
+	Menu(SDL_Renderer*, ContentManager* c);
 	~Menu();
 	void Update();
 	void Draw();
+	void Event();
 private:
-	//Generic* m;
+	Player* player;
+	ContentManager * conMan;
 };
 #endif

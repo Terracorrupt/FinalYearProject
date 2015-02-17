@@ -46,6 +46,7 @@ bool Game::Initialize(const char* title, int xpos, int ypos, int width, int heig
 		DEBUG_MSG("SDL init fail");
 		return false;
 	}
+	conMan = new ContentManager(m_p_Renderer);
 
 	sceneManager->Instance()->Load();
 	//sceneManager->Initialize();
@@ -65,7 +66,7 @@ void Game::Render()
 	SDL_RenderClear(m_p_Renderer);
 
 	//Draw
-	SceneManager::Instance()->NextScene(m_p_Renderer)->Draw();
+	SceneManager::Instance()->NextScene(m_p_Renderer,conMan)->Draw();
 
 	//Show Window, spritebatch.end
 	SDL_RenderPresent(m_p_Renderer);
@@ -77,7 +78,7 @@ void Game::Update()
 	//while (m_running)
 	//{
 
-	SDL_RenderClear(m_p_Renderer);
+	//SDL_RenderClear(m_p_Renderer);
 
 		//Insert your hopes and dreams here
 		//while (SDL_PollEvent(&e))
@@ -90,10 +91,10 @@ void Game::Update()
 		//Events();
 
 		//Update dem scenes yo
-		SceneManager::Instance()->NextScene(m_p_Renderer)->Update();
+		SceneManager::Instance()->NextScene(m_p_Renderer, conMan)->Update();
 
 
-		SDL_RenderPresent(m_p_Renderer);
+		//SDL_RenderPresent(m_p_Renderer);
 
 	//}
 }
@@ -109,7 +110,7 @@ void Game::HandleEvents()
 			break;
 		}
 	}
-
+	SceneManager::Instance()->NextScene(m_p_Renderer, conMan)->Event();
 	//sceneManager->HandleEvents();
 }
 

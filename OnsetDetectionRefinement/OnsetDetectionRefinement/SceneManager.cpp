@@ -23,7 +23,7 @@ void SceneManager::setCurrent(int i)
 	current = i;
 }
 
-Scene* SceneManager::NextScene(SDL_Renderer* r)
+Scene* SceneManager::NextScene(SDL_Renderer* r, ContentManager* c)
 {
 	switch (current)
 	{
@@ -32,7 +32,7 @@ Scene* SceneManager::NextScene(SDL_Renderer* r)
 	case 2: //Menu
 		if (last != 2)
 		{
-			active = new Menu(r);
+			active = new Menu(r, c);
 			last = 2;
 			previous = active;
 		}

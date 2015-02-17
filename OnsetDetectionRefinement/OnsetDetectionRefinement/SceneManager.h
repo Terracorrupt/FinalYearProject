@@ -13,7 +13,7 @@ public:
 	void Load();
 	int getCurrent();
 	void setCurrent(int);
-	Scene* NextScene(SDL_Renderer*);
+	Scene* NextScene(SDL_Renderer*, ContentManager*);
 
 	//Singelton
 	static SceneManager* Instance()

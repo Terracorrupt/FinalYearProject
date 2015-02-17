@@ -10,7 +10,7 @@ int main()
 
 	detector->setStarted(true);
 
-	float FPS = 300;
+	float FPS = 60;
 	const int DELAY_TIME = 1000.0f / FPS;
 	Uint32 frameStart, frameTime;
 
