@@ -1,7 +1,8 @@
 #include "BeatDetector.h"
 
+BeatDetector* BeatDetector::instance = 0;
 
-BeatDetector::BeatDetector(int sSize, char* audioString)
+void BeatDetector::Load(int sSize, char* audioString)
 {
 	//Take in Aruguments
 	sampleSize = sSize;
@@ -164,9 +165,9 @@ float BeatDetector::calculateFluxAndSmoothing(float* currentSpectrum)
 	if (smoothMedian > 2 && smoothMedian < 4)
 		thresholdSmoother = 1.0f;
 	if (smoothMedian > 4 && smoothMedian < 6)
-		thresholdSmoother = 2.5f;
+		thresholdSmoother = 2.2f;
 	if (smoothMedian > 6)
-		thresholdSmoother = 2.9f;
+		thresholdSmoother = 2.4f;
 
 	return thresholdSmoother + median;
 }

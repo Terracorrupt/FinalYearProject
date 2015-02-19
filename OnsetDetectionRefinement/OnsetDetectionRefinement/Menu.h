@@ -12,6 +12,7 @@ public:
 	void Draw();
 	void Event();
 private:
+	GateManager* gateManager;
 	Player* player;
 	ContentManager * conMan;
 };

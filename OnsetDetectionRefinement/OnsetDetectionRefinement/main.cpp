@@ -5,10 +5,12 @@
 
 int main()
 {
-	BeatDetector* detector = new BeatDetector(1024, "Sound/SK1.mp3"); 
+	//BeatDetector* detector = new BeatDetector(1024, "Sound/SK1.mp3"); 
 	int test;
 
-	detector->setStarted(true);
+	BeatDetector::Instance()->Load(1024, "Sound/gangam.mp3");
+
+	BeatDetector::Instance()->setStarted(true);
 
 	float FPS = 60;
 	const int DELAY_TIME = 1000.0f / FPS;
@@ -16,7 +18,7 @@ int main()
 
 	DEBUG_MSG("Game Object Created");
 
-	TheGame::Instance()->Initialize("Onset Detector", 100, 100, 900, 700, 0);
+	TheGame::Instance()->Initialize("Onset Detector", 450, 150, 1024, 768, 0);
 	DEBUG_MSG("Game Initialised");
 
 	DEBUG_MSG("Game Loop Starting......");
@@ -27,7 +29,7 @@ int main()
 		TheGame::Instance()->Update();
 		TheGame::Instance()->Render();
 
-		detector->update();
+		BeatDetector::Instance()->update();
 
 		frameTime = SDL_GetTicks() - frameStart;
 
@@ -40,7 +42,7 @@ int main()
 	DEBUG_MSG("Calling Cleanup");
 	TheGame::Instance()->CleanUp();
 
-	detector->setStarted(false);
+	BeatDetector::Instance()->setStarted(false);
 
 	//while (detector->isPlaying())
 		//detector->update();

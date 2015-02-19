@@ -2,8 +2,8 @@
 
 Player::Player(ContentManager* c)
 {
-	width = 66;
-	height = 60;
+	width = 70;
+	height = 76;
 	conMan = c;
 	gravity = true;
 	alive = true;
@@ -29,7 +29,7 @@ void Player::Initialize()
 
 void Player::Load()
 {
-	conMan->LoadTexture("Textures/test.png", "player", width, height, 1);
+	conMan->LoadTexture("Textures/Ship.png", "player", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }
@@ -41,11 +41,9 @@ void Player::HandleEvents()
 		
 			if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_W))
 			{
-				if (velocity->m_y > -7)
-					velocity->m_y -= 0.4;
-				else
-					velocity->m_y += 0.2;
-
+			
+				velocity->m_y = -6;
+			
 				position->m_y += velocity->m_y;
 
 
@@ -54,10 +52,9 @@ void Player::HandleEvents()
 			}
 			else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_S))
 			{
-				if (velocity->m_y<10)
-					velocity->m_y += 0.4;
-				else
-					velocity->m_y -= 0.2;
+				
+				velocity->m_y = 12;
+			
 
 				//position->m_y += 7;
 				conMan->textures["player"]->currentFrame = 0;
@@ -76,6 +73,12 @@ void Player::HandleEvents()
 			}
 
 			position->m_y += velocity->m_y;
+
+			/*if (position->m_y < 0)
+				position->m_y = 0;
+
+			if (position->m_y > 768 - height)
+				position->m_y = 768 - height;*/
 			
 	}
 }
@@ -83,33 +86,23 @@ void Player::HandleEvents()
 void Player::Update()
 {
 
-	conMan->Update();
-	/*if (alive == true)
+	if (alive == true)
 	{
-		if (gravity == false)
-		{
-			if (touchingTop == false)
-			{
-				position->m_y -= 2;
-			}
-		}
+		if (position->m_y < 0)
+			position->m_y = 0;
 
-		if (gravity == true)
-		{
-			if (touchingBottom == false)
-			{
-				position->m_y += 2;
-			}
-		}
+		if (position->m_y > 768 - height)
+			position->m_y = 768 - height;
+
 	}
 
 	if (alive == false)
 	{
-		position = spawnPoint;
-		alive = true;
-		gravity = true;
-		conMan->textures["player"]->currentFrame = 0;
-	}*/
+		//position = spawnPoint;
+		//alive = true;
+		//gravity = true;
+		//conMan->textures["player"]->currentFrame = 0;
+	}
 }
 
 void Player::Draw()

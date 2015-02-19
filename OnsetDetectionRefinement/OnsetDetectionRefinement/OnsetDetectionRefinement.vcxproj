@@ -78,7 +78,10 @@
     <ClInclude Include="FMODSetup.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Gate.h" />
+    <ClInclude Include="GateManager.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="LargeGateObject.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
@@ -91,7 +94,10 @@
     <ClCompile Include="BeatDetector.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="GateManager.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="LargeGateObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />

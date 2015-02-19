@@ -44,7 +44,7 @@ void Texture::Draw(Vector2D* position, SDL_RendererFlip flip)
 
 	destRect.x = (int)position->GetX();
 	destRect.y = (int)position->GetY();
-	SDL_RenderCopyEx(m_p_Renderer, texture, &srcRect, &destRect, 0, 0, flip);
+	SDL_RenderCopyEx(m_p_Renderer, texture, 0, &destRect, 0, 0, flip);
 }
 
 //used for animating images

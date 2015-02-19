@@ -14,7 +14,8 @@
 class BeatDetector
 {
 public:
-	BeatDetector(int, char*);
+	//BeatDetector(int, char*);
+	void Load(int, char*);
 	~BeatDetector();
 	void updateTime();
 	float* getCurrentSpectrum();
@@ -25,8 +26,20 @@ public:
 	void setStarted(bool);
 	TimeStamp* getLastBeat();
 	bool isPlaying();
+
+	//Singelton
+	static BeatDetector* Instance()
+	{
+		if (instance == 0)
+		{
+			instance = new BeatDetector();
+		}
+		return instance;
+	}
 	
 private:
+	BeatDetector(){};
+	static BeatDetector* instance;
 	FMOD::System *system;
 	FMOD_RESULT result;
 	int sampleSize;

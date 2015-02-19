@@ -7,7 +7,7 @@
 #include "ContentManager.h"
 #include "InputHandler.h"
 #include "Player.h"
-//#include "Enemy.h"
+#include "GateManager.h"
 //#include "SDL_mixer.h"
 #include <math.h>
 #include <iostream>
