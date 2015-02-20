@@ -33,7 +33,7 @@ private:
 	SDL_Window* m_p_Window;
 	SDL_Renderer* m_p_Renderer;
 	ContentManager* conMan;
-	SDL_Event event;
+	SDL_Event e;
 };
 #endif
 typedef Game TheGame;

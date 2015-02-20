@@ -33,5 +33,6 @@ public:
 	SDL_Texture* texture;
 	Vector2D* imagePosition;
 	SDL_Renderer* m_p_Renderer;
+	float rotation;
 };
 #endif

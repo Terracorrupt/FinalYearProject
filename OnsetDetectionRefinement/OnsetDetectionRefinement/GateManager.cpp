@@ -32,6 +32,39 @@ void GateManager::Update(Player* player)
 	{
 		gates.at(i)->Update();
 
+
+		//MAKE COLLISION BOXES
+		SDL_Rect a;
+		a.x = (int)player->position->GetX() + 5;
+		a.y = (int)player->position->GetY() + 5;
+		a.w = player->width - 5;
+		a.h = player->height - 5;
+
+		SDL_Rect b;
+		b.x = (int)gates.at(i)->gate1->position->m_x;
+		b.y = (int)gates.at(i)->gate1->position->m_y;
+		b.w = gates.at(i)->gate1->width;
+		b.h = gates.at(i)->gate1->height;
+
+		SDL_Rect c;
+		c.x = (int)gates.at(i)->gate2->position->m_x;
+		c.y = (int)gates.at(i)->gate2->position->m_y;
+		c.w = gates.at(i)->gate2->width;
+		c.h = gates.at(i)->gate2->height;
+
+		if (TheCollision::Instance()->CheckCollision(a, b))
+		{
+			DEBUG_MSG("Silly billy");
+			player->getHit();
+		}
+		if (TheCollision::Instance()->CheckCollision(a, c))
+		{
+			DEBUG_MSG("Silly billy");
+		}
+
+
+
+		//Destroy
 		if (gates.at(i)->getX() < -160)
 		{
 			//gates.at(i)->~Gate();
@@ -57,7 +90,7 @@ void GateManager::Add()
 {
 	currentGates += 1;
 
-	g->Load();
+	//g->Load();
 	gates.push_back(new Gate(conMan));
 }
 

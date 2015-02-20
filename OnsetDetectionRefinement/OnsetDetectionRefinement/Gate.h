@@ -17,9 +17,9 @@ public:
 	float getX();
 	//bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
 	Vector2D* velocity;
-private:
 	LargeGateObject* gate1;
 	LargeGateObject* gate2;
+private:
 	int rand1, rand2;
 	bool alive;
 };

@@ -11,7 +11,8 @@
 //#include "SDL_mixer.h"
 #include <math.h>
 #include <iostream>
-//#include "Obstacle.h"
+#include "Turret.h"
+#include "Bullet.h"
 
 class Scene
 {

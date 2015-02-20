@@ -21,6 +21,7 @@ Texture::Texture(SDL_Renderer* renderer, std::string fileName, int w, int h, int
 
 	frameCount = frames;
 	currentRow = 0;
+	rotation = 0;
 }
 
 Texture::~Texture()
@@ -37,14 +38,23 @@ void Texture::Update()
 // draw image to screen/single image
 void Texture::Draw(Vector2D* position, SDL_RendererFlip flip)
 {
-	srcRect.x = 0;
+	srcRect.x = width;
 	srcRect.y = 0;
 	srcRect.w = destRect.w = width;
 	srcRect.h = destRect.h = height;
 
+	SDL_Point* center = new SDL_Point();
+
+	center->x = srcRect.w / 2;
+	center->y = srcRect.h / 2;
+
 	destRect.x = (int)position->GetX();
 	destRect.y = (int)position->GetY();
-	SDL_RenderCopyEx(m_p_Renderer, texture, 0, &destRect, 0, 0, flip);
+
+	//if (rotation>0)
+		SDL_RenderCopyEx(m_p_Renderer, texture, 0, &destRect, rotation, center, flip);
+	
+
 }
 
 //used for animating images

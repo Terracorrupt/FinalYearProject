@@ -14,6 +14,7 @@ public:
 	void Update();
 	void Draw();
 	void SetSpawn(Vector2D* spawn);
+	void getHit();
 	bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
 	Vector2D* velocity;
 };

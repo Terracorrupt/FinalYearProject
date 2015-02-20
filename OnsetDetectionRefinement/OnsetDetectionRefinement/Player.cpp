@@ -124,8 +124,23 @@ void Player::Draw()
 	}*/
 }
 
+void Player::getHit()
+{
+	//int i = SDL_GetTicks();
+	//position->m_y += 50;
+
+	//if(SDL_GetTicks() - i > 5000)
+	//{
+		//
+	//}
+
+	//position->m_y -= 50;
+	
+}
+
 // set the players spawn point/ so i can use checkpoints
 void Player::SetSpawn(Vector2D* spawn)
 {
 	position = spawn;
 };
+

@@ -14,6 +14,8 @@ public:
 private:
 	GateManager* gateManager;
 	Player* player;
+	Turret* turret;
 	ContentManager * conMan;
+	int i = 0;
 };
 #endif

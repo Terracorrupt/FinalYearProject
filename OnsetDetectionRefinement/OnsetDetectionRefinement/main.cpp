@@ -8,7 +8,7 @@ int main()
 	//BeatDetector* detector = new BeatDetector(1024, "Sound/SK1.mp3"); 
 	int test;
 
-	BeatDetector::Instance()->Load(1024, "Sound/gangam.mp3");
+	BeatDetector::Instance()->Load(1024, "Sound/bruce.mp3");
 
 	BeatDetector::Instance()->setStarted(true);
 

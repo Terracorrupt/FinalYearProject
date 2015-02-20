@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "BeatDetector.h"
 #include "TimeStamp.h"
+#include "Collision.h"
 
 class GateManager
 {

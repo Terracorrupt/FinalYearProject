@@ -46,6 +46,12 @@ void ContentManager::DrawTexture(std::string id, Vector2D* position, SDL_Rendere
 	textures[id]->Draw(position, flip);
 }
 
+void ContentManager::DrawTexture(std::string id, Vector2D* position, SDL_RendererFlip flip, float rotation)
+{
+	textures[id]->Draw(position, flip);
+	textures[id]->rotation = rotation;
+}
+
 // animate all the textures
 void ContentManager::AnimateTexture(std::string id, Vector2D* position, SDL_RendererFlip flip)
 {

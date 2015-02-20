@@ -83,7 +83,6 @@ void Game::Update()
 		//Insert your hopes and dreams here
 		//while (SDL_PollEvent(&e))
 		//{
-
 		//}
 
 
@@ -101,14 +100,17 @@ void Game::Update()
 
 void Game::HandleEvents()
 {
-	if (SDL_PollEvent(&event))
+	if (SDL_PollEvent(&e))
 	{
-		switch (event.type)
+		switch (e.type)
 		{
 		case SDL_QUIT:
 			m_running = false;
 			break;
 		}
+
+		TheInputHandler::Instance()->event(e);
+
 	}
 	SceneManager::Instance()->NextScene(m_p_Renderer, conMan)->Event();
 	//sceneManager->HandleEvents();

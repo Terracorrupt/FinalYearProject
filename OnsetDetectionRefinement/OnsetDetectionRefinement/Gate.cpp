@@ -23,8 +23,8 @@ void Gate::Initialize()
 	rand2 = -rand1;
 	rand2 += 620;
 
-	gate1->SetSpawn(new Vector2D(700, -rand1));
-	gate2->SetSpawn(new Vector2D(700, rand2));
+	gate1->SetSpawn(new Vector2D(900, -rand1));
+	gate2->SetSpawn(new Vector2D(900, rand2));
 }
 
 void Gate::Load()

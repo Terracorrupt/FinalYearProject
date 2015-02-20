@@ -47,13 +47,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>fmodex_vc.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86;C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,6 +72,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BeatDetector.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="FMODErrorCheck.h" />
@@ -84,14 +86,18 @@
     <ClInclude Include="LargeGateObject.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeStamp.h" />
+    <ClInclude Include="Turret.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BeatDetector.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gate.cpp" />
@@ -104,6 +110,10 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeStamp.cpp" />
+    <ClCompile Include="Turret.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OnsetDetectionRefinement.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

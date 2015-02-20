@@ -22,6 +22,7 @@ public:
 	void LoadTexture(std::string fileName, std::string id, int width, int height, int frames);
 	void Update();
 	void DrawTexture(std::string id, Vector2D* position, SDL_RendererFlip flip);
+	void DrawTexture(std::string id, Vector2D* position, SDL_RendererFlip flip, float imgoingtokillmyself);
 	void AnimateTexture(std::string id, Vector2D* position, SDL_RendererFlip flip);
 	//void LoadMusic(std::string filename, std::string id);
 	//void PlayMusic(std::string id);
