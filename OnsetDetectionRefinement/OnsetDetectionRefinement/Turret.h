@@ -15,11 +15,15 @@ public:
 	void SetSpawn(Vector2D* spawn);
 	void getHit();
 	void add();
+	void Delay();
 	bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
 	Vector2D* velocity;
 	Vector2D* mousePos;
 	Bullet* bullet;
 	std::vector<Bullet*> bullets;
 	float angle;
+	int maxBullets;
+	bool allowedShoot;
+	int lastTickShot;
 };
 #endif

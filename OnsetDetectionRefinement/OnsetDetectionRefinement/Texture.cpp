@@ -24,6 +24,42 @@ Texture::Texture(SDL_Renderer* renderer, std::string fileName, int w, int h, int
 	rotation = 0;
 }
 
+Texture::Texture(SDL_Renderer* renderer, std::string fileName, int w, int h, int fontSize, std::string message, SDL_Color color)
+{
+	if (TTF_Init() == -1)
+	{
+		std::cout << TTF_GetError() << std::endl;
+	}
+
+	//Gets our font
+	font = TTF_OpenFont(fileName.c_str(), fontSize);
+
+	if (font == nullptr)
+		throw std::runtime_error("Failed to load font: " + fileName + TTF_GetError());
+	else
+		std::cout << "Font get" << std::endl;
+
+	m_p_Renderer = renderer;
+
+	SDL_Surface* pTempSurface = TTF_RenderText_Blended(font, message.c_str(), color);
+
+	if (pTempSurface == 0)
+	{
+		DEBUG_MSG("Image wasnt loaded");
+	}
+
+	texture = SDL_CreateTextureFromSurface(renderer, pTempSurface);
+	DEBUG_MSG("Image in texture Created");
+
+	SDL_FreeSurface(pTempSurface);
+
+	width = w;
+	height = h;
+
+	currentRow = 0;
+	rotation = 0;
+}
+
 Texture::~Texture()
 {
 	SDL_DestroyTexture(texture);
@@ -54,8 +90,9 @@ void Texture::Draw(Vector2D* position, SDL_RendererFlip flip)
 	//if (rotation>0)
 		SDL_RenderCopyEx(m_p_Renderer, texture, 0, &destRect, rotation, center, flip);
 	
-
 }
+
+
 
 //used for animating images
 void Texture::Animate(Vector2D* position, SDL_RendererFlip flip)

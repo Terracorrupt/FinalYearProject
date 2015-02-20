@@ -16,6 +16,8 @@ private:
 	Player* player;
 	Turret* turret;
 	ContentManager * conMan;
+	Text* t;
+
 	int i = 0;
 };
 #endif

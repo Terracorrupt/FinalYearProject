@@ -8,6 +8,8 @@
 #include "Vector2D.h"
 #include "SDL_image.h"
 #include "Debug.h"
+#include <SDL_ttf.h>
+#include <stdexcept>
 
 using namespace std;
 
@@ -15,6 +17,7 @@ class Texture
 {
 public:
 	Texture(SDL_Renderer* , std::string , int , int , int );
+	Texture(SDL_Renderer* renderer, std::string fontPath, int width, int height, int fontSize, std::string message, SDL_Color color);
 	~Texture();
 
 	void Draw(Vector2D*, SDL_RendererFlip );
@@ -28,11 +31,14 @@ public:
 	int frameCount;
 	int currentFrame;
 	int currentRow;
+;
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
 	SDL_Texture* texture;
 	Vector2D* imagePosition;
 	SDL_Renderer* m_p_Renderer;
 	float rotation;
+
+	TTF_Font *font;
 };
 #endif

@@ -8,7 +8,7 @@ int main()
 	//BeatDetector* detector = new BeatDetector(1024, "Sound/SK1.mp3"); 
 	int test;
 
-	BeatDetector::Instance()->Load(1024, "Sound/bruce.mp3");
+	BeatDetector::Instance()->Load(1024, "Sound/whiplash.mp3");
 
 	BeatDetector::Instance()->setStarted(true);
 
@@ -18,7 +18,7 @@ int main()
 
 	DEBUG_MSG("Game Object Created");
 
-	TheGame::Instance()->Initialize("Onset Detector", 450, 150, 1024, 768, 0);
+	TheGame::Instance()->Initialize("Onset Detector", 450, 150, 1200, 768, 0);
 	DEBUG_MSG("Game Initialised");
 
 	DEBUG_MSG("Game Loop Starting......");

@@ -31,7 +31,7 @@ void LargeGateObject::Initialize(float s)
 
 void LargeGateObject::Load()
 {
-	conMan->LoadTexture("Textures/gateLargeTest1.png", "gate", width, height, 1);
+	conMan->LoadTexture("Textures/Gate.png", "gate", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }

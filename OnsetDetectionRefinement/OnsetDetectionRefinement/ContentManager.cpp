@@ -31,6 +31,13 @@ void ContentManager::LoadTexture(std::string fileName, std::string id, int w, in
 	DEBUG_MSG("Texture Created");
 }
 
+// load in a texture
+void ContentManager::LoadTexture(std::string fileName, std::string id, int w, int h, int fontSize, std::string message, SDL_Color color)
+{
+	textures[id] = new Texture(renderer, fileName, w, h, fontSize,message,color);
+	DEBUG_MSG("Texture Created");
+}
+
 // update all the textures
 void ContentManager::Update()
 {

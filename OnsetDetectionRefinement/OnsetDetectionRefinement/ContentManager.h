@@ -20,6 +20,7 @@ public:
 	~ContentManager();
 
 	void LoadTexture(std::string fileName, std::string id, int width, int height, int frames);
+	void LoadTexture(std::string fileName, std::string id, int width, int height, int fontSize, std::string message, SDL_Color color);
 	void Update();
 	void DrawTexture(std::string id, Vector2D* position, SDL_RendererFlip flip);
 	void DrawTexture(std::string id, Vector2D* position, SDL_RendererFlip flip, float imgoingtokillmyself);

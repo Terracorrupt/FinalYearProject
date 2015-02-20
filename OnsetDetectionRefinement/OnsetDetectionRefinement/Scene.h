@@ -13,6 +13,8 @@
 #include <iostream>
 #include "Turret.h"
 #include "Bullet.h"
+#include "Text.h"
+
 
 class Scene
 {

@@ -14,9 +14,13 @@ Menu::Menu(SDL_Renderer* r, ContentManager* c)
 	turret->Load();
 
 	gateManager = new GateManager(r,conMan);
+
 	//gateManager->Initialize();
 	//gate->Load();
 
+	t = new Text(c, new Vector2D(100, 100), "Score: 0000");
+	t->Load();
+	
 	DEBUG_MSG("Menu Created");
 }
 
@@ -25,6 +29,7 @@ Menu::~Menu()
 	delete player;
 	delete gateManager;
 	delete turret;
+	delete t;
 }
 void Menu::Update()
 {
@@ -32,6 +37,7 @@ void Menu::Update()
 	player->Update();
 	turret->Update(player);
 	gateManager->Update(player);
+	t->Update();
 }
 
 void Menu::Draw()
@@ -39,6 +45,7 @@ void Menu::Draw()
 	player->Draw();
 	turret->Draw();
 	gateManager->Draw();
+	t->Draw();
 }
 
 void Menu::Event()

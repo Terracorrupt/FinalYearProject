@@ -18,6 +18,9 @@ Turret::Turret(ContentManager* c, Vector2D* initial)
 	mousePos = new Vector2D(0, 0);
 	bullet = new Bullet(conMan, new Vector2D(position->m_x, position->m_y));
 	angle = 0;
+	allowedShoot = true;
+	maxBullets = 0;
+	lastTickShot = 0;
 }
 
 Turret::~Turret()
@@ -43,8 +46,31 @@ void Turret::HandleEvents()
 	if (!bullet->alive)
 		bullet->position->m_y = position->m_y;
 
-	if (InputHandler::Instance()->GetMousePressedPosition()==true)
+	if (InputHandler::Instance()->GetMousePressedPosition() == true && allowedShoot)
+	{
 		add();
+		maxBullets++;
+		lastTickShot = SDL_GetTicks();
+
+		Delay();
+	}
+
+	if (maxBullets > 1)
+	{
+		allowedShoot = false;
+		if (SDL_GetTicks() - lastTickShot > 500)
+		{
+			allowedShoot = true;
+			maxBullets = 0;
+		}
+	}
+	else if (!allowedShoot)
+	{
+		if (SDL_GetTicks() - lastTickShot > 20)
+		{
+			allowedShoot = true;
+		}
+	}
 
 }
 
@@ -58,7 +84,9 @@ void Turret::Update(GameObject* player)
 		bullets.at(i)->Update(mousePos);
 
 
-		if (bullets.at(i)->position->m_x> 1400)
+		if (bullets.at(i)->position->m_x> 1400 || bullets.at(i)->position->m_x < 0)
+			bullets.erase(bullets.begin() + i);
+		else if (bullets.at(i)->position->m_y> 900 || bullets.at(i)->position->m_x < -20)
 			bullets.erase(bullets.begin() + i);
 
 	}
@@ -88,4 +116,9 @@ void Turret::add()
 	Bullet* b = new Bullet(conMan, new Vector2D(position->m_x + 20, position->m_y + 2));
 	b->alive = true;
 	bullets.push_back(b);
+}
+
+void Turret::Delay()
+{
+	allowedShoot = false;
 }
