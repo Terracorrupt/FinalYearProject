@@ -38,22 +38,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\FMOD\inc;..\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;..\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include;..\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>fmodex_vc.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Student\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86;C:\Student\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86;C:\Student\SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\FMOD\lib;..\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86;..\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86;..\SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -63,11 +60,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../FMOD/inc/;../SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include;../SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;../SDL2-devel-2.0.3-VC\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86;../SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86;../SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86;../FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodex_vc.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

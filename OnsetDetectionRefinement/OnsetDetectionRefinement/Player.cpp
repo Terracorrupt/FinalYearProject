@@ -29,7 +29,7 @@ void Player::Initialize()
 
 void Player::Load()
 {
-	conMan->LoadTexture("Textures/Ship.png", "player", width, height, 1);
+	conMan->LoadTexture("../Textures/Ship.png", "player", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }

@@ -27,7 +27,7 @@ Bullet::~Bullet()
 
 void Bullet::Load()
 {
-	conMan->LoadTexture("Textures/Bullet.png", "bullet", width, height, 1);
+	conMan->LoadTexture("../Textures/Bullet.png", "bullet", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }

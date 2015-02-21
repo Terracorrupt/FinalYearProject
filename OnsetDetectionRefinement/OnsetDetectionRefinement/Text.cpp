@@ -17,7 +17,7 @@ Text::~Text()
 
 void Text::Load()
 {
-	conMan->LoadTexture("Fonts/DIMITRI.ttf", "score", width, height, 36, message, color);
+	conMan->LoadTexture("../Fonts/DIMITRI.ttf", "score", width, height, 36, message, color);
 	//conMan->LoadTexture("Textures/Bullet.png", "bullet", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");

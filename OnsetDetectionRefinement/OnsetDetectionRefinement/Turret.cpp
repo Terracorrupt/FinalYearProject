@@ -30,7 +30,7 @@ Turret::~Turret()
 
 void Turret::Load()
 {
-	conMan->LoadTexture("Textures/Turret.png", "turret", width, height, 1);
+	conMan->LoadTexture("../Textures/Turret.png", "turret", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 	bullet->Load();
