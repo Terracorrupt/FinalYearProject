@@ -1,0 +1,98 @@
+#include "GateManager.h"
+
+GateManager::GateManager(SDL_Renderer* r, ContentManager* c)
+{
+	renderer = r;
+	maxGates = 4;
+	currentGates = 0;
+	renderer = r;
+	conMan = c;
+	g = new Gate(conMan);
+	g->Load();
+}
+
+GateManager::~GateManager()
+{
+}
+
+void GateManager::Update(Player* player)
+{
+	//Logic for adding a new Gate...
+	
+
+	if (lastBeat != BeatDetector::Instance()->getLastBeat())
+	{
+		Add();
+		DEBUG_MSG("BOOM BEAT IN GAME");
+	}
+
+
+	//What happens to all gates we have spawned
+	for (std::size_t i = 0; i < gates.size(); i++)
+	{
+		gates.at(i)->Update();
+
+
+		//MAKE COLLISION BOXES
+		SDL_Rect a;
+		a.x = (int)player->position->GetX() + 5;
+		a.y = (int)player->position->GetY() + 5;
+		a.w = player->width - 5;
+		a.h = player->height - 5;
+
+		SDL_Rect b;
+		b.x = (int)gates.at(i)->gate1->position->m_x;
+		b.y = (int)gates.at(i)->gate1->position->m_y;
+		b.w = gates.at(i)->gate1->width;
+		b.h = gates.at(i)->gate1->height;
+
+		SDL_Rect c;
+		c.x = (int)gates.at(i)->gate2->position->m_x;
+		c.y = (int)gates.at(i)->gate2->position->m_y;
+		c.w = gates.at(i)->gate2->width;
+		c.h = gates.at(i)->gate2->height;
+
+		if (TheCollision::Instance()->CheckCollision(a, b))
+		{
+			DEBUG_MSG("Silly billy");
+			player->getHit();
+		}
+		if (TheCollision::Instance()->CheckCollision(a, c))
+		{
+			DEBUG_MSG("Silly billy");
+		}
+
+
+
+		//Destroy
+		if (gates.at(i)->getX() < -160)
+		{
+			//gates.at(i)->~Gate();
+			gates.erase(gates.begin() + i);
+			
+			currentGates -= 1;
+		}
+	}
+
+	lastBeat = BeatDetector::Instance()->getLastBeat();
+}
+
+void GateManager::Draw()
+{
+	for (std::size_t i = 0; i < gates.size(); i++)
+	{
+		gates.at(i)->Draw();
+	}
+}
+
+// create a new gate
+void GateManager::Add()
+{
+	currentGates += 1;
+
+	//g->Load();
+	gates.push_back(new Gate(conMan));
+}
+
+
+
