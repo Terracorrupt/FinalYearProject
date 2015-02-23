@@ -9,10 +9,15 @@ GateManager::GateManager(SDL_Renderer* r, ContentManager* c)
 	conMan = c;
 	g = new Gate(conMan);
 	g->Load();
+	gateCombo = 1;
 }
 
 GateManager::~GateManager()
 {
+	delete g;
+	delete renderer;
+	delete conMan;
+	delete lastBeat;
 }
 
 void GateManager::Update(Player* player)
@@ -52,14 +57,38 @@ void GateManager::Update(Player* player)
 		c.w = gates.at(i)->gate2->width;
 		c.h = gates.at(i)->gate2->height;
 
-		if (TheCollision::Instance()->CheckCollision(a, b))
+		if (TheCollision::Instance()->CheckCollision(a, b) && gates.at(i)->getAlive()== true)
 		{
+			gates.at(i)->setAlive(false);
 			DEBUG_MSG("Silly billy");
 			player->getHit();
+
+			if (player->playerScore != 0)
+			{
+				player->playerScore -= 100;
+				gateCombo=1;
+			}
+				
 		}
-		if (TheCollision::Instance()->CheckCollision(a, c))
+		else if (TheCollision::Instance()->CheckCollision(a, c) && gates.at(i)->getAlive() == true)
 		{
+			gates.at(i)->setAlive(false);
 			DEBUG_MSG("Silly billy");
+			player->getHit();
+
+			if (player->playerScore != 0)
+			{
+				player->playerScore -= 100;
+				gateCombo=1;
+			}
+				
+		}
+		else if ((TheCollision::Instance()->CheckCollision(a, gates.at(i)->openGate) && gates.at(i)->getAlive() == true))
+		{
+			gates.at(i)->setAlive(false);
+			DEBUG_MSG("Score Plus");
+			player->playerScore += 100;
+			gateCombo++;
 		}
 
 
@@ -70,6 +99,7 @@ void GateManager::Update(Player* player)
 			//gates.at(i)->~Gate();
 			gates.erase(gates.begin() + i);
 			
+
 			currentGates -= 1;
 		}
 	}
@@ -94,5 +124,8 @@ void GateManager::Add()
 	gates.push_back(new Gate(conMan));
 }
 
-
+int GateManager::getCombo()
+{
+	return gateCombo;
+}
 

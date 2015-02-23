@@ -15,6 +15,7 @@ Player::Player(ContentManager* c)
 	onOil = false;
 	position = new Vector2D(100, 300);
 	velocity = new Vector2D(0, 0);
+	playerScore = 0;
 }
 
 Player::~Player()
@@ -29,7 +30,7 @@ void Player::Initialize()
 
 void Player::Load()
 {
-	conMan->LoadTexture("../Textures/Ship.png", "player", width, height, 1);
+	conMan->LoadTexture("../Textures/shipTemplateLCB.png", "player", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }

@@ -31,7 +31,7 @@ public:
 	int frameCount;
 	int currentFrame;
 	int currentRow;
-;
+
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
 	SDL_Texture* texture;

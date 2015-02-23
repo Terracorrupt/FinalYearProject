@@ -17,5 +17,6 @@ public:
 	void getHit();
 	bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
 	Vector2D* velocity;
+	int playerScore;
 };
 #endif

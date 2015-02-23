@@ -22,7 +22,10 @@ Bullet::Bullet(ContentManager* c, Vector2D* initial)
 
 Bullet::~Bullet()
 {
-	delete(conMan->textures["bullet"]);
+	
+	delete angle;
+	delete velocity;
+	delete position;
 }
 
 void Bullet::Load()

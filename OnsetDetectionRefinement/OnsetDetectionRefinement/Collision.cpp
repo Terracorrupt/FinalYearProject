@@ -8,6 +8,7 @@ Collision::Collision()
 
 Collision::~Collision()
 {
+	delete s_pInstance;
 }
 
 bool Collision::CheckCollision(SDL_Rect A, SDL_Rect B)

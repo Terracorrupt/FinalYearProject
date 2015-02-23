@@ -16,6 +16,8 @@ public:
 	void Update(Player* player);
 	void Draw();
 	void Add();
+	int getCombo();
+	void setCombo(int);
 	vector<Gate*> gates;
 	SDL_Renderer* renderer;
 	ContentManager* conMan;
@@ -23,6 +25,7 @@ public:
 	int currentGates;
 	TimeStamp* lastBeat;
 	Gate* g;
+	int gateCombo;
 };
 
 #endif

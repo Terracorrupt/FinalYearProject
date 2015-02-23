@@ -31,7 +31,7 @@ void LargeGateObject::Initialize(float s)
 
 void LargeGateObject::Load()
 {
-	conMan->LoadTexture("../Textures/Gate.png", "gate", width, height, 1);
+	conMan->LoadTexture("../Textures/gate2.png", "gate", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
 }
@@ -39,18 +39,11 @@ void LargeGateObject::Load()
 void LargeGateObject::Update()
 {
 
-	if (alive == true)
-	{
-		position->m_x -= speed;
-	}
+	//if (alive == true)
+	
+	position->m_x -= speed;
+	
 
-	if (alive == false)
-	{
-		//position = spawnPoint;
-		//alive = true;
-		//gravity = true;
-		//conMan->textures["player"]->currentFrame = 0;
-	}
 }
 
 void LargeGateObject::Draw()

@@ -76,6 +76,8 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FMODErrorCheck.h" />
     <ClInclude Include="FMODSetup.h" />
     <ClInclude Include="Game.h" />
@@ -84,12 +86,12 @@
     <ClInclude Include="GateManager.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LargeGateObject.h" />
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeStamp.h" />
     <ClInclude Include="Turret.h" />
@@ -100,17 +102,19 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ContentManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GateManager.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LargeGateObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TimeStamp.cpp" />
     <ClCompile Include="Turret.cpp" />
   </ItemGroup>

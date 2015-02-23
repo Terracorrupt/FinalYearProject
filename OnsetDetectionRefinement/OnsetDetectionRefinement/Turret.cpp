@@ -26,13 +26,16 @@ Turret::Turret(ContentManager* c, Vector2D* initial)
 Turret::~Turret()
 {
 	delete(conMan->textures["turret"]);
+	delete(conMan->textures["bullet"]);
 }
 
 void Turret::Load()
 {
-	conMan->LoadTexture("../Textures/Turret.png", "turret", width, height, 1);
+	conMan->LoadTexture("../Textures/turret2.png", "turret", width, height, 1);
 	//conMan->textures["player"]->currentFrame = 0;
 	//conMan->LoadSound("Content/jump.wav", "Space");
+
+	position->m_x += 35;
 	bullet->Load();
 }
 

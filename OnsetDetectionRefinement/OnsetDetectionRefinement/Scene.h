@@ -8,12 +8,13 @@
 #include "InputHandler.h"
 #include "Player.h"
 #include "GateManager.h"
+#include "EnemyManager.h"
 //#include "SDL_mixer.h"
 #include <math.h>
 #include <iostream>
 #include "Turret.h"
 #include "Bullet.h"
-#include "Text.h"
+#include "TextRenderer.h"
 
 
 class Scene

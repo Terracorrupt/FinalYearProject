@@ -24,6 +24,7 @@ void BeatDetector::Load(int sSize, char* audioString)
 	beatThreshold = 0.6f;
 	thresholdSmoother = 0.6f;
 	started = false;
+	lastBeatRegistered = new TimeStamp();
 
 	previousFFT = new float[sampleSize / 2 + 1];
 	for (int i = 0; i < sampleSize / 2; i++)
@@ -36,7 +37,7 @@ void BeatDetector::Load(int sSize, char* audioString)
 
 	//Create channel and audio
 	FMODErrorCheck(system->createChannelGroup(NULL, &channelMusic));
-	FMODErrorCheck(system->createSound(songString, FMOD_SOFTWARE, 0, &audio));
+	FMODErrorCheck(system->createStream(songString, FMOD_SOFTWARE, 0, &audio));
 
 	audio->getLength(&seconds, FMOD_TIMEUNIT_MS);
 	audio->getDefaults(&sampleRate, 0, 0, 0);

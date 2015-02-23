@@ -29,15 +29,15 @@ Scene* SceneManager::NextScene(SDL_Renderer* r, ContentManager* c)
 	{
 	case 1: //Loading
 		break;
-	case 2: //Menu
+	case 2: //Level
 		if (last != 2)
 		{
-			active = new Menu(r, c);
+			active = new Level(r, c);
 			last = 2;
 			previous = active;
 		}
 		break;
-	case 3: //Level
+	case 3: //Menu
 		if (last != 3)
 		{
 			//active = new Level(r);

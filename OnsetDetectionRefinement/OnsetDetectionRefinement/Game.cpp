@@ -11,12 +11,22 @@ Game::Game() : m_running(true)
 
 Game::~Game()
 {
+	delete sceneManager;
+	delete s_pInstance;
+	delete m_p_Renderer;
+	delete m_p_Window;
+	delete conMan;
 }
 
 bool Game::Initialize(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
+	SDL_DisplayMode current;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
+
+		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
+
 		DEBUG_MSG("SDL Init success");
 		m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, 0);
 

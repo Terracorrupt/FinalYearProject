@@ -41,7 +41,7 @@ Texture::Texture(SDL_Renderer* renderer, std::string fileName, int w, int h, int
 
 	m_p_Renderer = renderer;
 
-	SDL_Surface* pTempSurface = TTF_RenderText_Blended(font, message.c_str(), color);
+	SDL_Surface* pTempSurface = TTF_RenderText_Solid(font, message.c_str(), color);
 
 	if (pTempSurface == 0)
 	{
@@ -64,7 +64,6 @@ Texture::~Texture()
 {
 	SDL_DestroyTexture(texture);
 }
-
 
 void Texture::Update()
 {
