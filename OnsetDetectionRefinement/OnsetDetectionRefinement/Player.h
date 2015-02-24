@@ -11,7 +11,7 @@ public:
 	void Initialize();
 	void Load();
 	void HandleEvents();
-	void Update();
+	void Update(SDL_DisplayMode);
 	void Draw();
 	void SetSpawn(Vector2D* spawn);
 	void getHit();

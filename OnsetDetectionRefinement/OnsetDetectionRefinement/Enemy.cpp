@@ -23,7 +23,6 @@ Enemy::~Enemy()
 {
 	delete velocity;
 	delete position;
-	
 }
 
 void Enemy::Initialize(Vector2D* initial)
@@ -44,12 +43,12 @@ void Enemy::Update()
 		if (!direction)
 		{
 			position->m_x -= 3;
-			position->m_y -= 4;
+			position->m_y -= 2;
 		}
 		else
 		{
 			position->m_x -= 3;
-			position->m_y += 4;
+			position->m_y += 2;
 		}
 
 		if (SDL_GetTicks() - lastTick > 700)

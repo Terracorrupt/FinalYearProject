@@ -7,7 +7,7 @@ GateManager::GateManager(SDL_Renderer* r, ContentManager* c)
 	currentGates = 0;
 	renderer = r;
 	conMan = c;
-	g = new Gate(conMan);
+	g = new Gate(conMan, 900);
 	g->Load();
 	gateCombo = 1;
 }
@@ -20,14 +20,14 @@ GateManager::~GateManager()
 	delete lastBeat;
 }
 
-void GateManager::Update(Player* player)
+void GateManager::Update(Player* player, SDL_DisplayMode window)
 {
 	//Logic for adding a new Gate...
 	
 
 	if (lastBeat != BeatDetector::Instance()->getLastBeat())
 	{
-		Add();
+		Add(window);
 		DEBUG_MSG("BOOM BEAT IN GAME");
 	}
 
@@ -116,16 +116,19 @@ void GateManager::Draw()
 }
 
 // create a new gate
-void GateManager::Add()
+void GateManager::Add(SDL_DisplayMode window)
 {
 	currentGates += 1;
 
 	//g->Load();
-	gates.push_back(new Gate(conMan));
+	gates.push_back(new Gate(conMan, window.w));
 }
 
 int GateManager::getCombo()
 {
-	return gateCombo;
+	if (gateCombo > 0)
+		return gateCombo;
+	else
+		return 0;
 }
 

@@ -1,13 +1,13 @@
 #include "Gate.h"
 
-Gate::Gate(ContentManager* c)
+Gate::Gate(ContentManager* c, int w)
 {
-	gate1 = new LargeGateObject(c);
-	gate2 = new LargeGateObject(c);
+	gate1 = new LargeGateObject(c,true);
+	gate2 = new LargeGateObject(c,false);
 
 	alive = true;
 	
-	Initialize();
+	Initialize(w);
 }
 
 Gate::~Gate()
@@ -17,7 +17,7 @@ Gate::~Gate()
 	delete velocity;
 }
 
-void Gate::Initialize()
+void Gate::Initialize(int w)
 {
 	gate1->Initialize(9.0f);
 	gate2->Initialize(9.0f);
@@ -26,8 +26,17 @@ void Gate::Initialize()
 	rand2 = -rand1;
 	rand2 += 620;
 
-	gate1->SetSpawn(new Vector2D(900, -rand1));
-	gate2->SetSpawn(new Vector2D(900, rand2));
+	if (w > 1200)
+	{
+		gate1->SetSpawn(new Vector2D(w - 500, (-rand1 - 320)));
+		gate2->SetSpawn(new Vector2D(w - 500, (rand2 + 320)));
+	}
+	else if (w < 1200 && w>800)
+	{
+		gate1->SetSpawn(new Vector2D(w - 500, (-rand1 - 200)));
+		gate2->SetSpawn(new Vector2D(w - 500, (rand2 + 200)));
+	}
+		
 
 	openGate.x = (int) gate1->position->m_x;
 	openGate.w = (int) gate1->width;

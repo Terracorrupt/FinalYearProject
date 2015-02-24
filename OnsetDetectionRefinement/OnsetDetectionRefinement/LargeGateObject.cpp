@@ -1,6 +1,6 @@
 #include "LargeGateObject.h"
 
-LargeGateObject::LargeGateObject(ContentManager* c)
+LargeGateObject::LargeGateObject(ContentManager* c, bool top)
 {
 	width = 40;
 	height = 466;
@@ -14,7 +14,8 @@ LargeGateObject::LargeGateObject(ContentManager* c)
 	touchingLeft = false;
 	//onOil = false;
 	position = new Vector2D(700, 300);
-	velocity = new Vector2D(0, 0);
+	initial = new Vector2D(0, 0);
+	topOrBottom = top;
 }
 
 LargeGateObject::~LargeGateObject()
@@ -38,12 +39,20 @@ void LargeGateObject::Load()
 
 void LargeGateObject::Update()
 {
+	//DEBUG_MSG(position->m_y);
+	//DEBUG_MSG(initial->m_y);
 
-	//if (alive == true)
+	if (topOrBottom == true)
+	{
+		position->m_y += 2;
+	}
+	else if (topOrBottom == false)
+	{
+		position->m_y -= 2;
+	}
 	
 	position->m_x -= speed;
 	
-
 }
 
 void LargeGateObject::Draw()
@@ -69,4 +78,5 @@ void LargeGateObject::Draw()
 void LargeGateObject::SetSpawn(Vector2D* spawn)
 {
 	position = spawn;
+	initial = spawn;
 };

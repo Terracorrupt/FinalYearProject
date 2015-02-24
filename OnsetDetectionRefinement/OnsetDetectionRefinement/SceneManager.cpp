@@ -7,6 +7,7 @@ void SceneManager::Load()
 	sceneNumbers[0] = 1;
 	sceneNumbers[1] = 2;
 	sceneNumbers[2] = 3;
+	sceneNumbers[3] = 4;
 
 	//CURRENT SCENE
 	current = 2;
@@ -29,19 +30,27 @@ Scene* SceneManager::NextScene(SDL_Renderer* r, ContentManager* c)
 	{
 	case 1: //Loading
 		break;
-	case 2: //Level
+	case 2: //Menu
 		if (last != 2)
 		{
-			active = new Level(r, c);
+			active = new Menu(r, c);
 			last = 2;
 			previous = active;
 		}
 		break;
-	case 3: //Menu
+	case 3: //DragFile
 		if (last != 3)
 		{
-			//active = new Level(r);
+			active = new DragMusicFile(r, c);
 			last = 3;
+			previous = active;
+		}
+		break;
+	case 4: //Level
+		if (last != 4)
+		{
+			active = new Level(r, c);
+			last = 4;
 			previous = active;
 		}
 		break;

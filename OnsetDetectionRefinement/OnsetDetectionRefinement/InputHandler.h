@@ -22,7 +22,7 @@ public:
 	virtual Vector2D* GetMousePosition();
 	virtual bool GetMousePressedPosition();
 	virtual bool isKeyDown(SDL_Scancode);
-	virtual bool event(SDL_Event );
+	virtual bool event(SDL_Event* );
 	virtual Vector2D* motionVector();
 	Vector2D* mousePosition;
 	const Uint8* keyState;

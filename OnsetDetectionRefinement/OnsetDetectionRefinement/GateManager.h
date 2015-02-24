@@ -13,9 +13,9 @@ class GateManager
 public:
 	GateManager(SDL_Renderer* r, ContentManager* c);
 	~GateManager();
-	void Update(Player* player);
+	void Update(Player* player, SDL_DisplayMode d);
 	void Draw();
-	void Add();
+	void Add(SDL_DisplayMode);
 	int getCombo();
 	void setCombo(int);
 	vector<Gate*> gates;

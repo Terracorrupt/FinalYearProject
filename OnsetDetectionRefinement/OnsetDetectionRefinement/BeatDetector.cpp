@@ -62,6 +62,14 @@ BeatDetector::~BeatDetector()
 	delete system;
 }
 
+char* BeatDetector::isLoaded()
+{
+
+	audio->getName(songName, 50);
+
+	return songName;
+}
+
 void BeatDetector::updateTime()
 {
 	currentTime = GetTickCount();

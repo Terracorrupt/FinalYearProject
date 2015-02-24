@@ -26,6 +26,7 @@ public:
 	void setStarted(bool);
 	TimeStamp* getLastBeat();
 	bool isPlaying();
+	char* isLoaded();
 
 	//Singelton
 	static BeatDetector* Instance()
@@ -55,6 +56,7 @@ private:
 	const char* songString;
 	bool started;
 	TimeStamp* lastBeatRegistered;
+	char* songName;
 
 	FMOD::Sound *audio;
 	FMOD::ChannelGroup *channelMusic;

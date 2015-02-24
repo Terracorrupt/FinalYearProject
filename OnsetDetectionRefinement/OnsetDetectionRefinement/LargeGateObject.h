@@ -6,7 +6,7 @@
 class LargeGateObject : public GameObject
 {
 public:
-	LargeGateObject(ContentManager* c);
+	LargeGateObject(ContentManager* c, bool top);
 	~LargeGateObject();
 	void Initialize(float);
 	void Load();
@@ -14,7 +14,8 @@ public:
 	void Draw();
 	void SetSpawn(Vector2D* spawn);
 	bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
-	Vector2D* velocity;
+	Vector2D* initial;
 	float speed;
+	bool topOrBottom;
 };
 #endif

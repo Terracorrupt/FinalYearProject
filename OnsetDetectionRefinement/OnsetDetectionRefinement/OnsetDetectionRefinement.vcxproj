@@ -76,6 +76,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="DragMusicFile.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FMODErrorCheck.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LargeGateObject.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
@@ -102,6 +104,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ContentManager.cpp" />
+    <ClCompile Include="DragMusicFile.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -111,6 +114,7 @@
     <ClCompile Include="LargeGateObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Texture.cpp" />

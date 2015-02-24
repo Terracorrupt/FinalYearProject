@@ -8,7 +8,6 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 	player->Load();
 
 	rend = r;
-	 
 
 	i++;
 	DEBUG_MSG(i);
@@ -34,15 +33,15 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 	orange = { 255, 50, 0 };
 	activeComboColor = blue;
 
-	t->message = "0000";
-	textTure = t->RenderText(t->message, white);
+	t->message = "00000";
+	SDL_Texture* textTure = t->RenderText(t->message, white);
 	textRect.x = 40;
 	textRect.y = 15;
-	textRect.w = 80;
+	textRect.w = 100;
 	textRect.h = 50;
 
 	t2->message = "x0";
-	textTure2 = t->RenderText(t->message, activeComboColor);
+	SDL_Texture*  textTure2 = t->RenderText(t->message, activeComboColor);
 	textRect2.x = 600;
 	textRect2.y = 15;
 	textRect2.w = 80;
@@ -55,10 +54,18 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 	prevScore = 0;
 	combo = 0;
 	finalCombo = 0;
-	
-	DEBUG_MSG("Menu Created");
+	prevCombo = 0;
+	prevEnemyScore = 0;
+	prevGateScore = 0;
 
-	conMan->LoadTexture("../Textures/sky.png", "sky", 1200, 768, 1);
+	DEBUG_MSG("Level Created");
+
+	SDL_DestroyTexture(textTure);
+	SDL_DestroyTexture(textTure2);
+	skyTrue = false;
+	//conMan->LoadTexture("../Textures/sky.png", "sky", 1200, 768, 1);
+
+	BeatDetector::Instance()->setStarted(true);
 }
 
 Level::~Level()
@@ -70,25 +77,30 @@ Level::~Level()
 	delete t;
 	delete t2;
 	delete conMan;
-	delete textTure;
-	delete textTure2;
 	delete conMan->textures["sky"];
 }
-void Level::Update()
+void Level::Update(SDL_DisplayMode window)
 {
+
+	//COMBO STUFF STARTS IN
 	prevScore = finalScore;
+	prevEnemyScore = enemyManager->getEnemyScore();
+	prevGateScore = player->playerScore;
+	
+	BeatDetector::Instance()->update();
 
 	//conMan->Update();
-	player->Update();
+	player->Update(window);
 	turret->Update(player);
-	gateManager->Update(player);
+	gateManager->Update(player, window);
 	enemyManager->Update(player, turret);
 
 	if (combo<36)
 		combo = enemyManager->getCombo() + gateManager->getCombo();
 	if (combo >= 36)
 		combo = 35;
-
+	if (combo<0)
+		combo = 1;
 
 	if (finalCombo < 6)
 	{
@@ -119,20 +131,30 @@ void Level::Update()
 		activeComboColor = red;
 	}
 		
-
-	if (finalCombo>0)
+	if (prevCombo > 1 && finalCombo == 1)
+	{
+		finalScore = prevScore - 100;
+		player->playerScore = prevGateScore*prevCombo;
+		enemyManager->setCombo(prevEnemyScore*prevCombo);
+		finalScore = ((player->playerScore + enemyManager->getEnemyScore())*prevCombo -100);
+		enemyManager->enemyCombo = 1;
+		gateManager->gateCombo = 1;
+	}
+	else if (finalCombo > 1)
 		finalScore = ((player->playerScore + enemyManager->getEnemyScore())*finalCombo);
 	else
-		finalScore = player->playerScore + enemyManager->getEnemyScore();
+		finalScore = ((player->playerScore + enemyManager->getEnemyScore()));
+
+	
 
 	std::string s = std::to_string(finalScore);
 
 	if (finalScore == 0)
-		s.insert(0, "0000");
+		s.insert(0, "00000");
 	else if (finalScore < 1000)
-		s.insert(0, "00");
+		s.insert(0, "000");
 	else if (finalScore >= 1000 && finalScore < 10000)
-		s.insert(0, "0");
+		s.insert(0, "00");
 	
 
 	std::string s2 = std::to_string(finalCombo);
@@ -141,6 +163,26 @@ void Level::Update()
 	t->message = s;
 	t2->message = s2;
 
+	prevCombo = finalCombo;
+
+
+	//RESIZING
+	if (window.w > 1200)
+	{
+		textRect.w = 160;
+		textRect.h = 70;
+		textRect.x = 50;
+		textRect.y = 20;
+
+		if (!skyTrue)
+		{
+			conMan->LoadTexture("../Textures/sky.png", "sky", window.w, window.h, 1);
+			skyTrue = true;
+		}
+
+	}
+		
+		
 	
 	//t->setMessage(s);
 	//t->Update();
@@ -157,13 +199,17 @@ void Level::Draw()
 
 	if (finalScore != prevScore)
 	{
+		SDL_DestroyTexture(textTure);
+		SDL_DestroyTexture(textTure2);
+		
 		textTure = t->RenderText(t->message, white);
 		textTure2 = t->RenderText(t2->message, activeComboColor);
-
 	}
-	
-	SDL_RenderCopy(rend, textTure, 0, &textRect);
-	SDL_RenderCopy(rend, textTure2, 0, &textRect2);
+
+		SDL_RenderCopy(rend, textTure, 0, &textRect);
+		SDL_RenderCopy(rend, textTure2, 0, &textRect2);
+
+		
 
 	//textRect.x = 40;
 	//textRect.y = 15;

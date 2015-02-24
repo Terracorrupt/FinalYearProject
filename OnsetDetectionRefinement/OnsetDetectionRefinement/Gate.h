@@ -7,9 +7,9 @@
 class Gate
 {
 public:
-	Gate(ContentManager* c);
+	Gate(ContentManager* c, int w);
 	~Gate();
-	void Initialize();
+	void Initialize(int w);
 	void Load();
 	void Update();
 	void Draw();

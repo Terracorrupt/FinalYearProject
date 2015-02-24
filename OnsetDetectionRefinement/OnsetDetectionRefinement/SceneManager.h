@@ -2,9 +2,9 @@
 #define SCENEMANAGER_H
 
 #include <SDL.h>
-//#include "Level1.h"
+#include "DragMusicFile.h"
 #include "Level.h"
-//#include "Level2.h"
+#include "Menu.h"
 #include "Scene.h"
 
 class SceneManager
@@ -31,7 +31,7 @@ private:
 
 	//LOADING,MENU,LEVEL
 
-	int sceneNumbers[3];
+	int sceneNumbers[4];
 
 	int current;
 	Scene* previous;

@@ -34,7 +34,7 @@ void EnemyManager::Update(Player* player, Turret* turret)
 	//Testing....
 	if ((SDL_GetTicks() - lastTickSpawned) > (1000-rand3*50))
 	{
-		if (currentEnemies < maxEnemies)
+		if (enemies.size() < maxEnemies)
 			Add();
 
 		lastTickSpawned = SDL_GetTicks();
@@ -62,6 +62,8 @@ void EnemyManager::Update(Player* player, Turret* turret)
 		c.h = player->height - 5;
 
 		//Check against each bullet active
+		//DEBUG_MSG(turret->bullets.size());
+		DEBUG_MSG(enemies.size());
 
 		for (std::size_t j = 0; j < turret->bullets.size(); j++)
 		{
@@ -78,12 +80,12 @@ void EnemyManager::Update(Player* player, Turret* turret)
 				enemyScore += 100;
 				enemyCombo++;
 			}
-
 		}
 
 		if ((TheCollision::Instance()->CheckCollision(a, c)) && enemies.at(i)->alive == true)
 		{
 			enemies.at(i)->alive = false;
+
 			currentEnemies -= 1;
 			enemyScore -= 100;
 			enemyCombo = 1;
@@ -91,7 +93,8 @@ void EnemyManager::Update(Player* player, Turret* turret)
 
 		if (enemies.at(i)->alive == false)
 		{
-			
+			enemies.erase(enemies.begin() + i);
+
 		}
 		else if (enemies.at(i)->position->m_x > 1500 || enemies.at(i)->position->m_x < -40 || enemies.at(i)->position->m_y > 1000 || enemies.at(i)->position->m_y < -100)
 		{
@@ -131,9 +134,20 @@ void EnemyManager::Add()
 
 int EnemyManager::getEnemyScore()
 {
-	return enemyScore;
+	if (enemyScore > 0)
+		return enemyScore;
+	else
+		return 0;
 }
 int EnemyManager::getCombo()
 {
-	return enemyCombo;
+	if (enemyCombo > 0)
+		return enemyCombo;
+	else
+		return 0;
+}
+
+void EnemyManager::setCombo(int co)
+{
+	enemyCombo = co;
 }

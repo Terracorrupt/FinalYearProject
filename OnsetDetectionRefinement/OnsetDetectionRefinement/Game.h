@@ -24,6 +24,9 @@ public:
 	void HandleEvents();
 	bool IsRunning();
 	void CleanUp();
+
+	SDL_Event* Gete();
+
 private:
 	Game();
 	~Game();
@@ -33,7 +36,8 @@ private:
 	SDL_Window* m_p_Window;
 	SDL_Renderer* m_p_Renderer;
 	ContentManager* conMan;
-	SDL_Event e;
+	SDL_Event* e;
+	SDL_DisplayMode current;
 };
 #endif
 typedef Game TheGame;

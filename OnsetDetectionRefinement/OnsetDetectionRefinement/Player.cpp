@@ -84,7 +84,7 @@ void Player::HandleEvents()
 	}
 }
 
-void Player::Update()
+void Player::Update(SDL_DisplayMode window)
 {
 
 	if (alive == true)
@@ -92,8 +92,8 @@ void Player::Update()
 		if (position->m_y < 0)
 			position->m_y = 0;
 
-		if (position->m_y > 768 - height)
-			position->m_y = 768 - height;
+		if (position->m_y > window.h - 150 - height)
+			position->m_y = window.h - 150 - height;
 
 	}
 

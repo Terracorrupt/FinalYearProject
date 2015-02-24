@@ -52,12 +52,12 @@ bool InputHandler::GetMousePressedPosition()
 
 }
 
-bool InputHandler::event(SDL_Event e)
+bool InputHandler::event(SDL_Event* e)
 {
-	if (e.type == SDL_MOUSEMOTION)
+	if (e->type == SDL_MOUSEMOTION)
 	{
-		mx = e.motion.x;
-		my = e.motion.y;
+		mx = e->motion.x;
+		my = e->motion.y;
 	}
 
 	return true;

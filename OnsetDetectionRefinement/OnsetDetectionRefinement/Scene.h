@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "GateManager.h"
 #include "EnemyManager.h"
+//#include "SceneManager.h"
 //#include "SDL_mixer.h"
 #include <math.h>
 #include <iostream>
@@ -20,7 +21,7 @@
 class Scene
 {
 public:
-	virtual void Update() = 0;
+	virtual void Update(SDL_DisplayMode) = 0;
 	virtual void Draw() = 0;
 	virtual void Event() = 0;
 	//Mix_Music* music;

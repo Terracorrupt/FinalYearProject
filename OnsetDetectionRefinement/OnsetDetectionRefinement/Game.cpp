@@ -7,6 +7,8 @@ Game* Game::s_pInstance = 0;
 
 Game::Game() : m_running(true)
 {
+
+	e = new SDL_Event();
 }
 
 Game::~Game()
@@ -18,17 +20,20 @@ Game::~Game()
 	delete conMan;
 }
 
+SDL_Event* Game::Gete()
+{
+	return e;
+}
+
 bool Game::Initialize(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
-	SDL_DisplayMode current;
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 
 		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 
 		DEBUG_MSG("SDL Init success");
-		m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, 0);
+		m_p_Window = SDL_CreateWindow(title, 40, 40, current.w - 100, current.h - 100, 0);
 
 		if (m_p_Window != 0)
 		{
@@ -94,13 +99,26 @@ void Game::Update()
 		//while (SDL_PollEvent(&e))
 		//{
 		//}
-
-
+		
+		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 		//Have we switched state?
 		//Events();
+		DEBUG_MSG(current.w);
+
+		//Move from Menu to DragMusicFile
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getCurrent() == 2)
+		{
+			SceneManager::Instance()->setCurrent(3);
+		}
+		//Move from DragMusicFile to Level
+		else if (SceneManager::Instance()->getCurrent() == 3 && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+		{
+			SceneManager::Instance()->setCurrent(4);
+		}
+
 
 		//Update dem scenes yo
-		SceneManager::Instance()->NextScene(m_p_Renderer, conMan)->Update();
+		SceneManager::Instance()->NextScene(m_p_Renderer, conMan)->Update(current);
 
 
 		//SDL_RenderPresent(m_p_Renderer);
@@ -110,9 +128,9 @@ void Game::Update()
 
 void Game::HandleEvents()
 {
-	if (SDL_PollEvent(&e))
+	if (SDL_PollEvent(e))
 	{
-		switch (e.type)
+		switch (e->type)
 		{
 		case SDL_QUIT:
 			m_running = false;

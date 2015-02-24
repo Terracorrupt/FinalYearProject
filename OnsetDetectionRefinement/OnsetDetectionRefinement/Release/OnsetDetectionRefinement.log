@@ -1,11 +1,11 @@
-﻿Build started 2/23/2015 3:21:57 PM.
+﻿Build started 2/24/2015 11:23:39 AM.
      1>Project "C:\Users\student\Desktop\OnsetDetectionRefinement\OnsetDetectionRefinement\OnsetDetectionRefinement.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../FMOD/inc/ /I"../SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include" /I"../SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include" /I"../SDL2-devel-2.0.3-VC\SDL2-2.0.3\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Level.cpp
          Level.cpp
-     1>Level.cpp(73): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
-                 c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\SDL_render.h(127) : see declaration of 'SDL_Texture'
      1>Level.cpp(74): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
+                 c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\SDL_render.h(127) : see declaration of 'SDL_Texture'
+     1>Level.cpp(75): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
                  c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\SDL_render.h(127) : see declaration of 'SDL_Texture'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\student\Desktop\OnsetDetectionRefinement\Release\OnsetDetectionRefinement.exe" /NOLOGO /LIBPATH:"../SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86" /LIBPATH:"../SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86" /LIBPATH:"../SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86" /LIBPATH:../FMOD\lib fmodex_vc.lib SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\student\Desktop\OnsetDetectionRefinement\Release\OnsetDetectionRefinement.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\student\Desktop\OnsetDetectionRefinement\Release\OnsetDetectionRefinement.lib" /MACHINE:X86 /SAFESEH Release\OnsetDetectionRefinement.res
@@ -35,4 +35,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.51
+Time Elapsed 00:00:01.59

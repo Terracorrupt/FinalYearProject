@@ -8,9 +8,9 @@ int main()
 	//BeatDetector* detector = new BeatDetector(1024, "Sound/SK1.mp3"); 
 	int test;
 
-	BeatDetector::Instance()->Load(1024, "../Sound/dino.mp3");
+	//BeatDetector::Instance()->Load(1024, "../Sound/dino.mp3");
 
-	BeatDetector::Instance()->setStarted(true);
+	
 
 	
 
@@ -32,7 +32,7 @@ int main()
 		TheGame::Instance()->Update();
 		TheGame::Instance()->Render();
 
-		BeatDetector::Instance()->update();
+		//BeatDetector::Instance()->update();
 
 		frameTime = SDL_GetTicks() - frameStart;
 
