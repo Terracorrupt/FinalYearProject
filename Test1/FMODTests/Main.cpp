@@ -1,7 +1,7 @@
 #include "FMODSetup.h"
 #include <algorithm>
 #include <queue>
-#include <Windows.h>
+#include <time.h>
 #include <array>
 #include <math.h>
 
@@ -32,7 +32,21 @@ int main()
 	int musicStartTick = 0;
 	bool beatDetected = false;
 
-	
+	clock_t t1, t2;
+
+	t1 = clock();
+
+	int i;
+
+	for (i = 0; i < 10000000; i++)
+	{
+		int x = 90;
+	}
+
+	t2 = clock();
+
+	float diff = (((float)t2 - (float)t1) / 1000000.0F) * 1000;
+	printf("%f", diff);
 
 	//Get System Pointer from setup
 	system = fmodSetup();
@@ -53,7 +67,7 @@ int main()
 	FMODErrorCheck(system->playSound(FMOD_CHANNEL_FREE, audio, true, &songChannel1));
 
 	songChannel1->setChannelGroup(channelMusic);
-	songChannel1->setPaused(false);
+	songChannel1->setPaused(true);
 
 	float hzRange = (44100 / 2) / static_cast<float>(sampleSize);
 
@@ -87,45 +101,45 @@ int main()
 		//songChannel1->setVolume(0.2);
 
 		//If current spectrum is greater than or equal to the threshold (.300 ) and we've finished ignoring, a beat has occured 
-		if (specStereo[beatThresholdBar] >= beatThresholdVolume && beatLastTick == 0 && beatIgnoreLastTick == 0)
-		{
-			beatLastTick = GetTickCount();
-			beatTimes.push(beatLastTick);
+		//if (specStereo[beatThresholdBar] >= beatThresholdVolume && beatLastTick == 0 && beatIgnoreLastTick == 0)
+		//{
+			//beatLastTick = GetTickCount();
+		//	beatTimes.push(beatLastTick);
 
-			while (GetTickCount() - beatTimes.front() > beatTrackCutoff)
-			{
-				beatTimes.pop();
-				if (beatTimes.size() == 0)
-					break;
-			}
+		//	while (GetTickCount() - beatTimes.front() > beatTrackCutoff)
+		//	{
+		//		beatTimes.pop();
+		//		if (beatTimes.size() == 0)
+		//			break;
+		//	}
 
-			beatOccured = true;
-		}
+		//	beatOccured = true;
+		//}
 
-		if (GetTickCount() - beatLastTick < beatSustain && beatOccured)
-		{
-			std::cout << "BEAT AT VOL: " << specStereo[beatThresholdBar] << std::endl;
-			beatOccured = false;
-		}
-		else if (beatIgnoreLastTick == 0 && beatLastTick != 0)
-		{
-			beatLastTick = 0;
-			beatIgnoreLastTick = GetTickCount();
-		}
+		//if (GetTickCount() - beatLastTick < beatSustain && beatOccured)
+		//{
+		//	std::cout << "BEAT AT VOL: " << specStereo[beatThresholdBar] << std::endl;
+		//	beatOccured = false;
+		//}
+		//else if (beatIgnoreLastTick == 0 && beatLastTick != 0)
+		//{
+		//	beatLastTick = 0;
+		//	beatIgnoreLastTick = GetTickCount();
+		//}
 
-		if (GetTickCount() - beatIgnoreLastTick >= beatPostIgnore)
-			beatIgnoreLastTick = 0;
+		//if (GetTickCount() - beatIgnoreLastTick >= beatPostIgnore)
+		//	beatIgnoreLastTick = 0;
 
-		// Predict BPM
-		float msPerBeat, bpmEstimate;
+		//// Predict BPM
+		//float msPerBeat, bpmEstimate;
 
-		if (beatTimes.size() >= 2)
+		/*if (beatTimes.size() >= 2)
 		{
 			msPerBeat = (beatTimes.back() - beatTimes.front()) / static_cast<float>(beatTimes.size() - 1);
 			bpmEstimate = 60000 / msPerBeat;
 		}
 		else
-			bpmEstimate = 0;
+			bpmEstimate = 0;*/
 
 		//std::cout << bpmEstimate << std::endl;
 		// Memory management
