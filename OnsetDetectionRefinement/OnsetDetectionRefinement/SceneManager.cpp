@@ -8,10 +8,12 @@ void SceneManager::Load()
 	sceneNumbers[1] = 2;
 	sceneNumbers[2] = 3;
 	sceneNumbers[3] = 4;
+	sceneNumbers[4] = 5;
 
 	//CURRENT SCENE
 	current = 2;
 	last = 1;
+	highScore = 0;
 }
 
 int SceneManager::getCurrent()
@@ -22,6 +24,11 @@ int SceneManager::getCurrent()
 void SceneManager::setCurrent(int i)
 {
 	current = i;
+}
+
+Scene* SceneManager::getActiveScene()
+{
+	return active;
 }
 
 Scene* SceneManager::NextScene(SDL_Renderer* r, ContentManager* c)
@@ -51,6 +58,19 @@ Scene* SceneManager::NextScene(SDL_Renderer* r, ContentManager* c)
 		{
 			active = new Level(r, c);
 			last = 4;
+			previous = active;
+		}
+		break;
+	case 5: //HighScoreScreen
+		if (last != 5)
+		{
+			if (last == 4)
+			{
+				highScore = active->getHighScore();
+			}
+
+			active = new HighScoreScreen(r, c,highScore);
+			last = 5;
 			previous = active;
 		}
 		break;

@@ -15,7 +15,7 @@ class EnemyManager
 public:
 	EnemyManager(SDL_Renderer* r, ContentManager* c);
 	~EnemyManager();
-	void Update(Player* player, Turret* turret);
+	void Update(Player* player, Turret* turret, int finalCombo);
 	void Draw();
 	void Add();
 	int getEnemyScore();
@@ -33,6 +33,9 @@ public:
 	int enemyCombo;
 private:
 	int rand1, rand2, rand3;
+	int increase;
+	SDL_Rect a, b, c;
+	Enemy *e;
 };
 
 #endif

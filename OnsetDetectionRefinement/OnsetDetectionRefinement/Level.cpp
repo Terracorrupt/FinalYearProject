@@ -26,11 +26,11 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 
 	//t->Load();
 	white = { 255, 255, 255 };
-	blue = { 0, 0, 255 };
+	blue = { 0, 100, 255 };
 	red = { 255, 0, 0 };
 	green = { 0, 255, 0 };
 	yellow = { 255, 255, 0 };
-	orange = { 255, 50, 0 };
+	orange = { 255, 165, 0 };
 	activeComboColor = blue;
 
 	t->message = "00000";
@@ -42,8 +42,8 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 
 	t2->message = "x0";
 	SDL_Texture*  textTure2 = t->RenderText(t->message, activeComboColor);
-	textRect2.x = 600;
-	textRect2.y = 15;
+	textRect2.x = 40;
+	textRect2.y = 500;
 	textRect2.w = 80;
 	textRect2.h = 50;
 
@@ -53,19 +53,28 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 	finalScore = 0;
 	prevScore = 0;
 	combo = 0;
-	finalCombo = 0;
+	finalCombo = 1;
 	prevCombo = 0;
 	prevEnemyScore = 0;
 	prevGateScore = 0;
 
 	DEBUG_MSG("Level Created");
 
+	initialTicks = SDL_GetTicks();
+
 	SDL_DestroyTexture(textTure);
 	SDL_DestroyTexture(textTure2);
 	skyTrue = false;
 	//conMan->LoadTexture("../Textures/sky.png", "sky", 1200, 768, 1);
 
-	BeatDetector::Instance()->setStarted(true);
+	transition = false;
+
+	BeatDetector::Instance()->getSystem()->createSound("../Sound/threeTone2.mp3", FMOD_SOFTWARE, 0, &sfx1);
+
+	BeatDetector::Instance()->getSystem()->playSound(FMOD_CHANNEL_FREE, sfx1, false, 0);
+
+	trackVis = new TrackVisualizer(conMan, rend);
+	trackVis->Load();
 }
 
 Level::~Level()
@@ -78,22 +87,29 @@ Level::~Level()
 	delete t2;
 	delete conMan;
 	delete conMan->textures["sky"];
+	delete BeatDetector::Instance();
 }
 void Level::Update(SDL_DisplayMode window)
 {
+
 
 	//COMBO STUFF STARTS IN
 	prevScore = finalScore;
 	prevEnemyScore = enemyManager->getEnemyScore();
 	prevGateScore = player->playerScore;
 	
-	BeatDetector::Instance()->update();
+	if ((SDL_GetTicks() - initialTicks) > 1200)
+	{
+		BeatDetector::Instance()->setStarted(true);
+		BeatDetector::Instance()->update();
+		trackVis->Update(window);
+	}
 
 	//conMan->Update();
 	player->Update(window);
 	turret->Update(player);
-	gateManager->Update(player, window);
-	enemyManager->Update(player, turret);
+	gateManager->Update(player, window, finalCombo);
+	enemyManager->Update(player, turret, finalCombo);
 
 	if (combo<36)
 		combo = enemyManager->getCombo() + gateManager->getCombo();
@@ -118,11 +134,11 @@ void Level::Update(SDL_DisplayMode window)
 	{
 		activeComboColor = green;
 	}
-	else if (finalCombo == 2)
+	else if (finalCombo == 3)
 	{
 		activeComboColor = yellow;
 	}
-	else if (finalCombo == 3)
+	else if (finalCombo == 4)
 	{
 		activeComboColor = orange;
 	}
@@ -131,23 +147,11 @@ void Level::Update(SDL_DisplayMode window)
 		activeComboColor = red;
 	}
 		
-	if (prevCombo > 1 && finalCombo == 1)
-	{
-		finalScore = prevScore - 100;
-		player->playerScore = prevGateScore*prevCombo;
-		enemyManager->setCombo(prevEnemyScore*prevCombo);
-		finalScore = ((player->playerScore + enemyManager->getEnemyScore())*prevCombo -100);
-		enemyManager->enemyCombo = 1;
-		gateManager->gateCombo = 1;
-	}
-	else if (finalCombo > 1)
-		finalScore = ((player->playerScore + enemyManager->getEnemyScore())*finalCombo);
-	else
-		finalScore = ((player->playerScore + enemyManager->getEnemyScore()));
-
 	
+	finalScore = ((player->playerScore + enemyManager->getEnemyScore()));
 
-	std::string s = std::to_string(finalScore);
+
+	s = std::to_string(finalScore);
 
 	if (finalScore == 0)
 		s.insert(0, "00000");
@@ -157,7 +161,7 @@ void Level::Update(SDL_DisplayMode window)
 		s.insert(0, "00");
 	
 
-	std::string s2 = std::to_string(finalCombo);
+	s2 = std::to_string(finalCombo);
 	s2.insert(0, "x");
 
 	t->message = s;
@@ -167,12 +171,17 @@ void Level::Update(SDL_DisplayMode window)
 
 
 	//RESIZING
-	if (window.w > 1200)
+	if (window.w > 1400)
 	{
 		textRect.w = 160;
 		textRect.h = 70;
 		textRect.x = 50;
 		textRect.y = 20;
+
+		textRect2.x = 40;
+		textRect2.y = 900;
+		textRect2.w = 80;
+		textRect2.h = 50;
 
 		if (!skyTrue)
 		{
@@ -181,9 +190,28 @@ void Level::Update(SDL_DisplayMode window)
 		}
 
 	}
-		
-		
+
 	
+	if (trackVis->onePercent < 5)
+	{
+		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + trackVis->onePercent))
+		{
+			//Maybe fade out?
+			transition = true;
+
+		}
+	}
+	else
+	{
+		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + 3))
+		{
+			//Maybe fade out?
+			transition = true;
+
+		}
+	}
+	
+		
 	//t->setMessage(s);
 	//t->Update();
 }
@@ -195,6 +223,8 @@ void Level::Draw()
 	turret->Draw();
 	enemyManager->Draw();
 	gateManager->Draw();
+	trackVis->Draw();
+
 	//t->Draw();
 
 	if (finalScore != prevScore)
@@ -230,4 +260,14 @@ void Level::Event()
 {
 	player->HandleEvents();
 	turret->HandleEvents();
+}
+
+bool Level::readyToTransition()
+{
+	return transition;
+}
+
+int Level::getHighScore()
+{
+	return finalScore;
 }

@@ -19,6 +19,7 @@ Menu::Menu(SDL_Renderer* r, ContentManager* c)
 
 	DEBUG_MSG("Menu Created");
 
+	transition = true;
 }
 
 Menu::~Menu()
@@ -42,4 +43,14 @@ void Menu::Update(SDL_DisplayMode window)
 void Menu::Draw()
 {
 	SDL_RenderCopy(rend, textTure, 0, &textRect);
+}
+
+bool Menu::readyToTransition()
+{
+	return transition;
+}
+
+int Menu::getHighScore()
+{
+	return 0;
 }

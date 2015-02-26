@@ -92,9 +92,13 @@ void Turret::Update(GameObject* player)
 		else if (bullets.at(i)->position->m_y> 900 || bullets.at(i)->position->m_x < -20)
 			bullets.erase(bullets.begin() + i);
 
+		//if (!bullets.at(i)->alive)
+		//{
+			//bullets.erase(bullets.begin() + i);
+		//}
+
 	}
 
-		
 	//bullets->Update(position);
 }
 
@@ -105,7 +109,6 @@ void Turret::Draw()
 	for (std::size_t i = 0; i < bullets.size(); i++)
 	{
 		bullets.at(i)->Draw();
-		
 	}
 }
 

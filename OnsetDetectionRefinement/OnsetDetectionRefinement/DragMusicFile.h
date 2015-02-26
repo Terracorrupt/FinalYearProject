@@ -11,6 +11,8 @@ public:
 	void Update(SDL_DisplayMode );
 	void Draw();
 	void Event();
+	bool readyToTransition();
+	int getHighScore();
 private:
 	ContentManager * conMan;
 	SDL_Renderer* rend;

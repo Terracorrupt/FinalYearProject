@@ -13,7 +13,7 @@ class GateManager
 public:
 	GateManager(SDL_Renderer* r, ContentManager* c);
 	~GateManager();
-	void Update(Player* player, SDL_DisplayMode d);
+	void Update(Player* player, SDL_DisplayMode d, int finalCombo);
 	void Draw();
 	void Add(SDL_DisplayMode);
 	int getCombo();
@@ -26,6 +26,7 @@ public:
 	TimeStamp* lastBeat;
 	Gate* g;
 	int gateCombo;
+	int increase;
 };
 
 #endif

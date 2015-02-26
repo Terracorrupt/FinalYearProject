@@ -1,12 +1,16 @@
-﻿Build started 2/24/2015 6:54:03 PM.
+﻿Build started 2/26/2015 8:49:55 PM.
      1>Project "C:\Users\student\Desktop\OnsetDetectionRefinement\OnsetDetectionRefinement\OnsetDetectionRefinement.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\FMOD\inc /I"..\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include" /I"..\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include" /I"..\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
-         Game.cpp
-     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\game.cpp(18): warning C4150: deletion of pointer to incomplete type 'SDL_Renderer'; no destructor called
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\FMOD\inc /I"..\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include" /I"..\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\include" /I"..\SDL2-devel-2.0.3-VC\SDL2-2.0.3\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Enemy.cpp Level.cpp
+         Level.cpp
+         Enemy.cpp
+     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\enemy.cpp(41): warning C4150: deletion of pointer to incomplete type 'SDL_Renderer'; no destructor called
                  c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\sdl_render.h(121) : see declaration of 'SDL_Renderer'
-     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\game.cpp(19): warning C4150: deletion of pointer to incomplete type 'SDL_Window'; no destructor called
-                 c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\sdl_video.h(89) : see declaration of 'SDL_Window'
+     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\enemy.cpp(46): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
+                 c:\users\student\desktop\onsetdetectionrefinement\sdl2-devel-2.0.3-vc\sdl2-2.0.3\include\sdl_render.h(127) : see declaration of 'SDL_Texture'
+     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\enemy.cpp(103): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\student\desktop\onsetdetectionrefinement\onsetdetectionrefinement\enemy.cpp(104): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\student\Desktop\OnsetDetectionRefinement\Debug\OnsetDetectionRefinement.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\FMOD\lib /LIBPATH:"..\SDL2-devel-2.0.3-VC\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x86" /LIBPATH:"..\SDL2-devel-2.0.3-VC\SDL2_image-devel-2.0.0-VC\SDL2_image-2.0.0\lib\x86" /LIBPATH:"..\SDL2-devel-2.0.3-VC\SDL2-2.0.3\lib\x86" fmodex_vc.lib SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\student\Desktop\OnsetDetectionRefinement\Debug\OnsetDetectionRefinement.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\student\Desktop\OnsetDetectionRefinement\Debug\OnsetDetectionRefinement.lib" /MACHINE:X86 Debug\OnsetDetectionRefinement.res
          Debug\BeatDetector.obj
@@ -19,6 +23,7 @@
          Debug\Game.obj
          Debug\Gate.obj
          Debug\GateManager.obj
+         Debug\HighScorecpp.obj
          Debug\InputHandler.obj
          Debug\LargeGateObject.obj
          Debug\main.obj
@@ -29,10 +34,11 @@
          Debug\Texture.obj
          Debug\TextRenderer.obj
          Debug\TimeStamp.obj
+         Debug\TrackVisualizer.obj
          Debug\Turret.obj
          OnsetDetectionRefinement.vcxproj -> C:\Users\student\Desktop\OnsetDetectionRefinement\Debug\OnsetDetectionRefinement.exe
      1>Done Building Project "C:\Users\student\Desktop\OnsetDetectionRefinement\OnsetDetectionRefinement\OnsetDetectionRefinement.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.95
+Time Elapsed 00:00:01.37

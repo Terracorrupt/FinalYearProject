@@ -22,7 +22,8 @@ Bullet::Bullet(ContentManager* c, Vector2D* initial)
 
 Bullet::~Bullet()
 {
-	
+	delete conMan;
+	delete renderer;
 	delete angle;
 	delete velocity;
 	delete position;
@@ -52,6 +53,7 @@ void Bullet::Update(Vector2D* towards)
 		position->m_x -= angle->m_x * speed;
 		position->m_y -= angle->m_y * speed;
 	}
+	
 }
 
 void Bullet::Draw()

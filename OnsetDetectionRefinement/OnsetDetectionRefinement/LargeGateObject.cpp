@@ -2,8 +2,8 @@
 
 LargeGateObject::LargeGateObject(ContentManager* c, bool top)
 {
-	width = 40;
-	height = 466;
+	width = 20;
+	height = 600;
 	conMan = c;
 	//gravity = true;
 	alive = true;
@@ -21,6 +21,9 @@ LargeGateObject::LargeGateObject(ContentManager* c, bool top)
 LargeGateObject::~LargeGateObject()
 {
 	delete(conMan->textures["gate"]);
+	delete conMan;
+	delete renderer;
+	delete initial;
 }
 
 void LargeGateObject::Initialize(float s)

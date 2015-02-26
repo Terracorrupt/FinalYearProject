@@ -85,6 +85,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="GateManager.h" />
+    <ClInclude Include="HighScoreScreen.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LargeGateObject.h" />
     <ClInclude Include="Level.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeStamp.h" />
+    <ClInclude Include="TrackVisualizer.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
@@ -110,6 +112,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GateManager.cpp" />
+    <ClCompile Include="HighScorecpp.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LargeGateObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -120,6 +123,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TimeStamp.cpp" />
+    <ClCompile Include="TrackVisualizer.cpp" />
     <ClCompile Include="Turret.cpp" />
   </ItemGroup>
   <ItemGroup>

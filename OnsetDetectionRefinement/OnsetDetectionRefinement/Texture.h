@@ -17,7 +17,6 @@ class Texture
 {
 public:
 	Texture(SDL_Renderer* , std::string , int , int , int );
-	Texture(SDL_Renderer* renderer, std::string fontPath, int width, int height, int fontSize, std::string message, SDL_Color color);
 	~Texture();
 
 	void Draw(Vector2D*, SDL_RendererFlip );
@@ -38,7 +37,7 @@ public:
 	Vector2D* imagePosition;
 	SDL_Renderer* m_p_Renderer;
 	float rotation;
-
+	SDL_Point* center;
 	TTF_Font *font;
 };
 #endif

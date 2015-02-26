@@ -20,9 +20,6 @@ DragMusicFile::DragMusicFile(SDL_Renderer* r, ContentManager* c)
 	SDL_RenderCopy(r, textTure, 0, &textRect);
 
 	DEBUG_MSG("DragFile Scene Created");
-
-	
-
 }
 
 DragMusicFile::~DragMusicFile()
@@ -30,6 +27,11 @@ DragMusicFile::~DragMusicFile()
 	delete t;
 	delete conMan;
 	delete rend;
+	delete t;
+	delete t2;
+	delete textTure;
+	delete textTure2;
+	delete path;
 }
 
 void DragMusicFile::Event()
@@ -46,10 +48,15 @@ void DragMusicFile::Update(SDL_DisplayMode window)
 		printf("File Dropped: %s", path);
 		BeatDetector::Instance()->Load(1024, path);
 		done = true;
+		DEBUG_MSG(BeatDetector::Instance()->getSongName());
 	}
 
 	if (done)
-		t->message = "Thank you. Please press space to begin";
+	{
+		t->message = "Thank you. Please press Enter to begin";
+		textTure = t->RenderText(t->message, white);
+	}
+		
 	
 	textRect.x = window.w / 2 - 350;
 	textRect.y = window.h / 2 - 100;
@@ -61,4 +68,14 @@ void DragMusicFile::Update(SDL_DisplayMode window)
 void DragMusicFile::Draw()
 {
 	SDL_RenderCopy(rend, textTure, 0, &textRect);
+}
+
+bool DragMusicFile::readyToTransition()
+{
+	return done;
+}
+
+int DragMusicFile::getHighScore()
+{
+	return 0;
 }

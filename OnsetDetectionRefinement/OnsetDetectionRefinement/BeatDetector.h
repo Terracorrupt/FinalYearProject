@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <queue>
-#include <Windows.h>
+#include <time.h>
 #include <array>
 #include <math.h>
 #include "fmod.hpp"
@@ -26,7 +26,13 @@ public:
 	void setStarted(bool);
 	TimeStamp* getLastBeat();
 	bool isPlaying();
-	char* isLoaded();
+	char* getSongName();
+	char* getArtistName();
+	bool stringValid(const std::string &str);
+	int getTime();
+	TimeStamp* getCurrentTime();
+	FMOD::System* getSystem();
+
 
 	//Singelton
 	static BeatDetector* Instance()
@@ -45,6 +51,7 @@ private:
 	FMOD_RESULT result;
 	int sampleSize;
 	int test;
+	int fullSeconds;
 	float sampleRate;
 	unsigned int seconds;
 	unsigned int minutes;
@@ -56,18 +63,23 @@ private:
 	const char* songString;
 	bool started;
 	TimeStamp* lastBeatRegistered;
-	char* songName;
+	char songName [50];
+	char* artistName;
+	FMOD_TAG tag;
+	TimeStamp* currentTimeStamp;
 
 	FMOD::Sound *audio;
 	FMOD::ChannelGroup *channelMusic;
 	FMOD::Channel *songChannel1;
 
-	DWORD initialTime;
-	DWORD currentTime;
+	int initialTime;
+	int currentTime;
 	int currentMillis;
-	DWORD currentSeconds;
-	DWORD lastSeconds;
-	DWORD currentMinutes;
+	int currentSeconds;
+	int lastSeconds;
+	int currentMinutes;
+
+	clock_t t1, t2;
 
 	float hzRange;
 

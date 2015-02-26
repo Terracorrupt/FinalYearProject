@@ -11,6 +11,8 @@
 #include "Texture.h"
 #include "InputHandler.h"
 #include "ContentManager.h"
+#include "TextRenderer.h"
+
 
 using namespace std;
 

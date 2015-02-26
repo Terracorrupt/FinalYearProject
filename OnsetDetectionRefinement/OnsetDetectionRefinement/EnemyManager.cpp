@@ -7,13 +7,14 @@ EnemyManager::EnemyManager(SDL_Renderer* r, ContentManager* c)
 	currentEnemies = 0;
 	renderer = r;
 	conMan = c;
-	g = new Enemy(conMan);
+	g = new Enemy(conMan,r);
 	g->Load();
 	lastBeat = BeatDetector::Instance()->getLastBeat();
 	lastTickSpawned = 0;
 	maxEnemies = 8;
 	enemyScore = 0;
 	enemyCombo = 1;
+	increase = 50;
 }
 
 EnemyManager::~EnemyManager()
@@ -25,7 +26,7 @@ EnemyManager::~EnemyManager()
 	delete(conMan->textures["enemy"]);
 }
 
-void EnemyManager::Update(Player* player, Turret* turret)
+void EnemyManager::Update(Player* player, Turret* turret, int finalCombo)
 {
 
 	rand3 = rand() % 4;
@@ -49,13 +50,11 @@ void EnemyManager::Update(Player* player, Turret* turret)
 		//Brute force movement
 		// tell enemies to move towards player
 		
-		SDL_Rect a;
 		a.x = (int)enemies.at(i)->position->GetX() + 5;
 		a.y = (int)enemies.at(i)->position->GetY() + 5;
 		a.w = enemies.at(i)->width - 5;
 		a.h = enemies.at(i)->height - 5;
 
-		SDL_Rect c;
 		c.x = (int)player->position->GetX() + 5;
 		c.y = (int)player->position->GetY() + 5;
 		c.w = player->width - 5;
@@ -63,35 +62,41 @@ void EnemyManager::Update(Player* player, Turret* turret)
 
 		//Check against each bullet active
 		//DEBUG_MSG(turret->bullets.size());
-		DEBUG_MSG(enemies.size());
 
 		for (std::size_t j = 0; j < turret->bullets.size(); j++)
 		{
-			SDL_Rect b;
 			b.x = turret->bullets.at(j)->position->m_x;
 			b.y = turret->bullets.at(j)->position->m_y;
 			b.w = turret->bullets.at(j)->width;
 			b.h = turret->bullets.at(j)->height;
 
+			//Once bullet hits enemy
 			if ((TheCollision::Instance()->CheckCollision(a, b)) && enemies.at(i)->alive == true)
 			{
 				enemies.at(i)->alive = false;
 				currentEnemies -= 1;
-				enemyScore += 100;
-				enemyCombo++;
+				enemyScore += increase;
+
+				enemies.at(i)->getHit(increase);
+				//turret->bullets.at(i)->alive = false;
+				//turret->bullets.erase(turret->bullets.begin() + i);
+
+
+				if (enemyCombo<15)
+					enemyCombo++;
 			}
 		}
-
+		
 		if ((TheCollision::Instance()->CheckCollision(a, c)) && enemies.at(i)->alive == true)
 		{
 			enemies.at(i)->alive = false;
 
 			currentEnemies -= 1;
-			enemyScore -= 100;
+			enemyScore -= increase;
 			enemyCombo = 1;
 		}
-
-		if (enemies.at(i)->alive == false)
+		//HERE
+		if (enemies.at(i)->alive == false && enemies.at(i)->isDead() == true)
 		{
 			enemies.erase(enemies.begin() + i);
 
@@ -104,6 +109,8 @@ void EnemyManager::Update(Player* player, Turret* turret)
 		}
 
 	}
+
+	increase = finalCombo * 50;
 
 	lastBeat = BeatDetector::Instance()->getLastBeat();
 }
@@ -121,7 +128,7 @@ void EnemyManager::Add()
 {
 	currentEnemies += 1;
 
-	Enemy *e = new Enemy(conMan);
+	e = new Enemy(conMan, renderer);
 
 	rand1 = rand() % 300 + 700;
 	rand2 = rand() % 600 + 100;

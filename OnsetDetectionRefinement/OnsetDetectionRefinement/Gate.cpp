@@ -24,17 +24,19 @@ void Gate::Initialize(int w)
 	
 	rand1 = rand() % 300 + 10;
 	rand2 = -rand1;
-	rand2 += 620;
+	rand2 += 790;
 
-	if (w > 1200)
+	if (w > 1400)
 	{
 		gate1->SetSpawn(new Vector2D(w - 500, (-rand1 - 320)));
 		gate2->SetSpawn(new Vector2D(w - 500, (rand2 + 320)));
 	}
-	else if (w < 1200 && w>800)
+	else if (w < 1400 && w>800)
 	{
-		gate1->SetSpawn(new Vector2D(w - 500, (-rand1 - 200)));
-		gate2->SetSpawn(new Vector2D(w - 500, (rand2 + 200)));
+		rand2 - 200;
+
+		gate1->SetSpawn(new Vector2D(w - 500, (-rand1 - 320)));
+		gate2->SetSpawn(new Vector2D(w - 500, (rand2 + 320)));
 	}
 		
 

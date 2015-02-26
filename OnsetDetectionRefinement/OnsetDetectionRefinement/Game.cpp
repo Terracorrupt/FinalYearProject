@@ -100,10 +100,8 @@ void Game::Update()
 		//{
 		//}
 		
-		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 		//Have we switched state?
 		//Events();
-		DEBUG_MSG(current.w);
 
 		//Move from Menu to DragMusicFile
 		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getCurrent() == 2)
@@ -111,9 +109,19 @@ void Game::Update()
 			SceneManager::Instance()->setCurrent(3);
 		}
 		//Move from DragMusicFile to Level
-		else if (SceneManager::Instance()->getCurrent() == 3 && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+		else if (SceneManager::Instance()->getCurrent() == 3 && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getActiveScene()->readyToTransition())
 		{
 			SceneManager::Instance()->setCurrent(4);
+		}
+		///Move from Level to High Score Screen
+		else if (SceneManager::Instance()->getCurrent() == 4 && SceneManager::Instance()->getActiveScene()->readyToTransition())
+		{
+			SceneManager::Instance()->setCurrent(5);
+		}
+		//Move from HighScore Screen to Menu (for now)
+		else if (SceneManager::Instance()->getCurrent() == 5 && SceneManager::Instance()->getActiveScene()->readyToTransition() && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+		{
+			SceneManager::Instance()->setCurrent(2);
 		}
 
 

@@ -12,6 +12,7 @@ ContentManager::~ContentManager()
 	{
 		delete(iterator->second);
 	}
+	delete renderer;
 
 	/*for (it_typeSound iterator = sounds.begin(); iterator != sounds.end(); ++iterator)
 	{
@@ -28,13 +29,6 @@ ContentManager::~ContentManager()
 void ContentManager::LoadTexture(std::string fileName, std::string id, int w, int h, int frames)
 {
 	textures[id] = new Texture(renderer, fileName, w, h, frames);
-	DEBUG_MSG("Texture Created");
-}
-
-// load in a texture
-void ContentManager::LoadTexture(std::string fileName, std::string id, int w, int h, int fontSize, std::string message, SDL_Color color)
-{
-	textures[id] = new Texture(renderer, fileName, w, h, fontSize,message,color);
 	DEBUG_MSG("Texture Created");
 }
 

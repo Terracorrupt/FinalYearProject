@@ -11,6 +11,8 @@ public:
 	void Update(SDL_DisplayMode );
 	void Draw();
 	void Event();
+	bool readyToTransition();
+	int getHighScore();
 private:
 	ContentManager * conMan;
 	SDL_Renderer* rend;
@@ -21,5 +23,7 @@ private:
 	SDL_Color blue, green, red, yellow, orange, white, activeComboColor;
 	SDL_Rect textRect;
 	SDL_Rect textRect2;
+	bool transition;
+
 };
 #endif

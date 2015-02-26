@@ -10,6 +10,7 @@ GateManager::GateManager(SDL_Renderer* r, ContentManager* c)
 	g = new Gate(conMan, 900);
 	g->Load();
 	gateCombo = 1;
+	increase = 50;
 }
 
 GateManager::~GateManager()
@@ -20,7 +21,7 @@ GateManager::~GateManager()
 	delete lastBeat;
 }
 
-void GateManager::Update(Player* player, SDL_DisplayMode window)
+void GateManager::Update(Player* player, SDL_DisplayMode window, int finalCombo)
 {
 	//Logic for adding a new Gate...
 	
@@ -87,8 +88,10 @@ void GateManager::Update(Player* player, SDL_DisplayMode window)
 		{
 			gates.at(i)->setAlive(false);
 			DEBUG_MSG("Score Plus");
-			player->playerScore += 100;
-			gateCombo++;
+			player->playerScore += increase;
+
+			if (gateCombo<20)
+				gateCombo++;
 		}
 
 
@@ -103,6 +106,8 @@ void GateManager::Update(Player* player, SDL_DisplayMode window)
 			currentGates -= 1;
 		}
 	}
+
+	increase = finalCombo * 50;
 
 	lastBeat = BeatDetector::Instance()->getLastBeat();
 }

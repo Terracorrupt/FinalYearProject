@@ -11,6 +11,8 @@ public:
 	void Update(SDL_DisplayMode);
 	void Draw();
 	void Event();
+	bool readyToTransition();
+	int getHighScore();
 private:
 	GateManager* gateManager;
 	EnemyManager* enemyManager;
@@ -34,5 +36,12 @@ private:
 	SDL_Color blue, green, red, yellow, orange, white, activeComboColor;
 	SDL_Rect textRect;
 	SDL_Rect textRect2;
+	TrackVisualizer* trackVis;
+	FMOD::Sound* sfx1;
+	FMOD::Channel* sfxChannel;
+	int initialTicks;
+	bool transition;
+	std::string s2;
+	std::string s;
 };
 #endif

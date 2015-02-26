@@ -13,7 +13,7 @@ void BeatDetector::Load(int sSize, char* audioString)
 	areWePlaying = true;
 	specFlux = 0.0f;
 	timeBetween = 0;
-	initialTime = GetTickCount();
+	initialTime = clock();
 	currentTime = 0;
 	currentSeconds = 0;
 	lastSeconds = 0;
@@ -43,6 +43,7 @@ void BeatDetector::Load(int sSize, char* audioString)
 	audio->getDefaults(&sampleRate, 0, 0, 0);
 	seconds = ((seconds + 500) / 1000);
 	minutes = seconds / 60;
+	fullSeconds = seconds;
 	seconds = seconds - (minutes * 60);
 
 	FMODErrorCheck(system->playSound(FMOD_CHANNEL_FREE, audio, true, &songChannel1));
@@ -55,6 +56,7 @@ void BeatDetector::Load(int sSize, char* audioString)
 	std::cout << "Sample Rate: " << sampleRate << std::endl;
 	std::cout << "Freq Range: " << hzRange << std::endl;
 	//songChannel1->setVolume(0);
+
 }
 
 BeatDetector::~BeatDetector()
@@ -62,17 +64,10 @@ BeatDetector::~BeatDetector()
 	delete system;
 }
 
-char* BeatDetector::isLoaded()
-{
-
-	audio->getName(songName, 50);
-
-	return songName;
-}
 
 void BeatDetector::updateTime()
 {
-	currentTime = GetTickCount();
+	currentTime = clock();
 	currentTime = currentTime - initialTime;
 	
 
@@ -92,6 +87,8 @@ void BeatDetector::updateTime()
 	}
 
 	currentMinutes = ((currentTime / 1000) / 60);
+
+	currentTimeStamp = new TimeStamp(currentMinutes, currentSeconds, currentMillis);
 }
 
 float* BeatDetector::getCurrentSpectrum()
@@ -196,7 +193,7 @@ void BeatDetector::update()
 			beatThreshold = calculateFluxAndSmoothing(specStereo);
 
 			//Beat detected
-			if (specFlux > beatThreshold && (GetTickCount() - timeBetween) > 350)
+			if (specFlux > beatThreshold && (clock() - timeBetween) > 350)
 			{
 				smootherValues.push_back(specFlux);
 
@@ -205,18 +202,18 @@ void BeatDetector::update()
 					smootherValues.erase(smootherValues.begin());
 				}
 
-				timeBetween = GetTickCount();
+				timeBetween = clock();
 
 				TimeStamp* t = new TimeStamp(currentMinutes, currentSeconds, currentMillis, specFlux);
 				std::cout << "BEAT AT: " << t->getMinutes() << ":" << t->getSeconds() << ":" << t->getMilliseconds() << " -- BEAT FREQ: " << t->getFrequency() << " -- THRESHOLD: " << beatThreshold << std::endl;
 				lastBeatRegistered = t;
 			}
-			else if ((GetTickCount() - timeBetween) > 5000)
+			else if ((clock() - timeBetween) > 5000)
 			{
 				if (thresholdSmoother>0.4f)
 					thresholdSmoother -= 0.4f;
 
-				timeBetween = GetTickCount();
+				timeBetween = clock();
 			}
 
 			songChannel1->isPlaying(&areWePlaying);
@@ -341,4 +338,49 @@ TimeStamp* BeatDetector::getLastBeat()
 bool BeatDetector::isPlaying()
 {
 	return areWePlaying;
+}
+
+FMOD::System* BeatDetector::getSystem()
+{
+	return system;
+}
+
+char* BeatDetector::getSongName()
+{
+	audio->getName(songName, 50);
+
+	return songName;
+}
+
+char* BeatDetector::getArtistName()
+{
+	char* title;
+	audio->getTag(NULL, 0, &tag);
+
+	audio->getTag("ARTIST", 0, &tag);
+	title = (char*)tag.data;
+
+
+	if (title && strcmp(title, "major_brand") != 0 && stringValid(title))
+		return title;
+	else
+		return "none";
+}
+
+bool BeatDetector::stringValid(const std::string &str)
+{
+	return find_if(str.begin(), str.end(),
+		[](char c) { return !(isalnum(c) || (c == ' ')); }) == str.end();
+}
+
+int BeatDetector::getTime()
+{
+	std::cout << "FullSecs: " << fullSeconds;
+
+	return fullSeconds;
+}
+
+TimeStamp* BeatDetector::getCurrentTime()
+{
+	return currentTimeStamp;
 }
