@@ -31,6 +31,7 @@ public:
 	bool stringValid(const std::string &str);
 	int getTime();
 	TimeStamp* getCurrentTime();
+	TimeStamp* getSongLength();
 	FMOD::System* getSystem();
 
 
@@ -63,6 +64,7 @@ private:
 	const char* songString;
 	bool started;
 	TimeStamp* lastBeatRegistered;
+	TimeStamp* totalSongTime;
 	char songName [50];
 	char* artistName;
 	FMOD_TAG tag;

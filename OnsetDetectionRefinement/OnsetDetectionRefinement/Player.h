@@ -18,5 +18,8 @@ public:
 	bool touchingLeft, touchingRight, touchingTop, touchingBottom, spaceClicked, gravity, onOil;
 	Vector2D* velocity;
 	int playerScore;
+	bool imHit;
+	int i;
+	int afterHit;
 };
 #endif

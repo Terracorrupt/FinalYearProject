@@ -2,6 +2,8 @@
 #define ENEMY_H
 
 #include "GameObject.h"
+#include <random>
+
 
 class Enemy : public GameObject
 {
@@ -11,7 +13,7 @@ public:
 	void Initialize(Vector2D*);
 	void Load();
 	void HandleEvents();
-	void Update();
+	void Update(GameObject*);
 	void Draw();
 	void SetSpawn(Vector2D* spawn);
 	void getHit(int amount);
@@ -29,5 +31,7 @@ public:
 	float hover;
 	int amount;
 	SDL_Texture * textTure;
+	bool isSpecial;
+	float speed;
 };
 #endif

@@ -29,7 +29,7 @@ EnemyManager::~EnemyManager()
 void EnemyManager::Update(Player* player, Turret* turret, int finalCombo)
 {
 
-	rand3 = rand() % 4;
+	rand3 = rand() % 6;
 
 
 	//Testing....
@@ -45,7 +45,7 @@ void EnemyManager::Update(Player* player, Turret* turret, int finalCombo)
 	//Update each enemy
 	for (std::size_t i = 0; i < enemies.size(); i++)
 	{
-		enemies.at(i)->Update();
+		enemies.at(i)->Update(player);
 
 		//Brute force movement
 		// tell enemies to move towards player
@@ -90,9 +90,9 @@ void EnemyManager::Update(Player* player, Turret* turret, int finalCombo)
 		if ((TheCollision::Instance()->CheckCollision(a, c)) && enemies.at(i)->alive == true)
 		{
 			enemies.at(i)->alive = false;
-
+			player->getHit();
 			currentEnemies -= 1;
-			enemyScore -= increase;
+			enemyScore -= 500;
 			enemyCombo = 1;
 		}
 		//HERE
@@ -109,6 +109,13 @@ void EnemyManager::Update(Player* player, Turret* turret, int finalCombo)
 		}
 
 	}
+
+	if (enemyScore<0)
+		enemyScore=0;
+
+	if (enemyCombo <= 1)
+		finalCombo = 0;
+
 
 	increase = finalCombo * 50;
 

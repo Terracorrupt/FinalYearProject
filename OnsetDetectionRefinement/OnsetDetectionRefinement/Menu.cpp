@@ -19,7 +19,8 @@ Menu::Menu(SDL_Renderer* r, ContentManager* c)
 
 	DEBUG_MSG("Menu Created");
 
-	transition = true;
+	transition = false;
+	i = SDL_GetTicks();
 }
 
 Menu::~Menu()
@@ -38,6 +39,11 @@ void Menu::Update(SDL_DisplayMode window)
 {
 	textRect.x = window.w / 2 - 100;
 	textRect.y = window.h / 2 - 100;
+
+	if (SDL_GetTicks() - i > 300)
+	{
+		transition = true;
+	}
 }
 
 void Menu::Draw()

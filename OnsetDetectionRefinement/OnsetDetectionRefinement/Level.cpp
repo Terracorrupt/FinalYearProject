@@ -75,6 +75,8 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 
 	trackVis = new TrackVisualizer(conMan, rend);
 	trackVis->Load();
+
+	parralaxPos1 = new Vector2D(0, 0);
 }
 
 Level::~Level()
@@ -151,6 +153,9 @@ void Level::Update(SDL_DisplayMode window)
 	finalScore = ((player->playerScore + enemyManager->getEnemyScore()));
 
 
+	if (finalScore < 0)
+		finalScore = 0;
+
 	s = std::to_string(finalScore);
 
 	if (finalScore == 0)
@@ -187,6 +192,7 @@ void Level::Update(SDL_DisplayMode window)
 		{
 			conMan->LoadTexture("../Textures/sky.png", "sky", window.w, window.h, 1);
 			skyTrue = true;
+			parralaxPos2 = new Vector2D(window.w, 0);
 		}
 
 	}
@@ -203,7 +209,7 @@ void Level::Update(SDL_DisplayMode window)
 	}
 	else
 	{
-		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + 3))
+		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + 5))
 		{
 			//Maybe fade out?
 			transition = true;
@@ -211,14 +217,30 @@ void Level::Update(SDL_DisplayMode window)
 		}
 	}
 	
-		
+
+	//Change parralax Position
+	parralaxPos1->m_x-=4;
+	parralaxPos2->m_x-=4;
+
+	if (parralaxPos1->m_x < -window.w)
+	{
+		parralaxPos1->m_x = window.w;
+	}
+	if (parralaxPos2->m_x < -window.w)
+	{
+		parralaxPos2->m_x = window.w;
+	}
 	//t->setMessage(s);
 	//t->Update();
 }
 
 void Level::Draw()
 {
-	conMan->DrawTexture("sky", new Vector2D(0, 0), SDL_FLIP_NONE);
+	//DrawSky
+	conMan->DrawTexture("sky", parralaxPos1, SDL_FLIP_NONE);
+	conMan->DrawTexture("sky", parralaxPos2, SDL_FLIP_NONE);
+
+
 	player->Draw();
 	turret->Draw();
 	enemyManager->Draw();

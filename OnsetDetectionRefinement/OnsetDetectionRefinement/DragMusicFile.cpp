@@ -7,18 +7,23 @@ DragMusicFile::DragMusicFile(SDL_Renderer* r, ContentManager* c)
 	rend = r;
 	path = NULL;
 
-	t = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 28);
+	t = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 38);
 	white = { 255, 255, 255 };
+
+	t2 = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 28);
+	t3 = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 28);
+	t4 = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 38);
 
 	t->message = "PLEASE DRAG IN A MUSIC FILE";
 	textTure = t->RenderText(t->message, white);
-	textRect.x = 400;
+	textRect.x = 340;
 	textRect.y = 300;
 	textRect.w = 500;
 	textRect.h = 50;
 
 	SDL_RenderCopy(r, textTure, 0, &textRect);
 
+	doOnce = false;
 	DEBUG_MSG("DragFile Scene Created");
 }
 
@@ -55,6 +60,105 @@ void DragMusicFile::Update(SDL_DisplayMode window)
 	{
 		t->message = "Thank you. Please press Enter to begin";
 		textTure = t->RenderText(t->message, white);
+
+		if (!doOnce)
+		{
+
+
+			std::string songName = BeatDetector::Instance()->getSongName();
+			int lastindex = songName.find_last_of(".");
+			std::string rawname = songName.substr(0, lastindex);
+
+			t2->message = rawname;
+
+			std::string artistName = BeatDetector::Instance()->getArtistName();
+
+			if (artistName != "none")
+			{
+				artistName.insert(0, " - ");
+				t3->message = artistName;
+			}
+			else
+				t3->message = " - Unknown Artist";
+
+			textTure2 = t2->RenderText(t2->message, white);
+			textTure3 = t3->RenderText(t3->message, white);
+
+			textRect2.x = window.w/2 - 280;
+			textRect2.y = 150;
+			textRect2.w = 300;
+			textRect2.h = 50;
+
+			textRect3.x = window.w/2 - 280;
+			textRect3.y = 210;
+			textRect3.w = 300;
+			textRect3.h = 50;
+
+			if (rawname.length() < 6)
+			{
+				textRect2.w = 300;
+				textRect2.h = 50;
+			}
+			if (rawname.length() < 10 && rawname.length() > 6)
+			{
+				textRect2.w = 400;
+				textRect2.h = 50;
+			}
+			if (rawname.length() < 15 && rawname.length() > 10)
+			{
+				textRect2.w = 600;
+				textRect2.h = 50;
+			}
+			if (rawname.length() > 15)
+			{
+				textRect2.w = 600;
+				textRect2.h = 50;
+				textRect2.x -= 100;
+			}
+
+			if (artistName.length() < 6)
+			{
+				textRect3.w = 300;
+				textRect3.h = 50;
+			}
+
+			if (artistName.length() < 10 && artistName.length() > 6)
+			{
+				textRect3.w = 400;
+				textRect3.h = 50;
+			}
+
+			if (artistName.length() < 15 && artistName.length() > 10)
+			{
+				textRect3.w = 600;
+				textRect3.h = 50;
+			}
+
+			std::string length;
+			int mins = BeatDetector::Instance()->getSongLength()->getMinutes();
+			int secs = BeatDetector::Instance()->getSongLength()->getSeconds();
+
+			length = std::to_string(mins);
+			int end = length.size();
+			length.insert(end, ":");
+			end = length.size();
+			length.insert(end, std::to_string(secs));
+
+			t4->message = length;
+			textRect4.x = window.w/2 - 180;
+			textRect4.y = 270;
+			textRect4.w = 100;
+			textRect4.h = 50;
+
+			textTure4 = t4->RenderText(t4->message, white);
+
+			SDL_RenderCopy(rend, textTure2, 0, &textRect2);
+			SDL_RenderCopy(rend, textTure3, 0, &textRect3);
+			SDL_RenderCopy(rend, textTure4, 0, &textRect4);
+
+			doOnce = true;
+		}
+
 	}
 		
 	
@@ -68,6 +172,14 @@ void DragMusicFile::Update(SDL_DisplayMode window)
 void DragMusicFile::Draw()
 {
 	SDL_RenderCopy(rend, textTure, 0, &textRect);
+
+	if (doOnce)
+	{
+		SDL_RenderCopy(rend, textTure2, 0, &textRect2);
+		SDL_RenderCopy(rend, textTure3, 0, &textRect3);
+		SDL_RenderCopy(rend, textTure4, 0, &textRect4);
+	}
+	
 }
 
 bool DragMusicFile::readyToTransition()

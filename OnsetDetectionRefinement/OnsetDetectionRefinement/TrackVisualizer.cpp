@@ -55,6 +55,11 @@ TrackVisualizer::TrackVisualizer(ContentManager* c, SDL_Renderer* r)
 	textRect2.w = 400;
 	textRect2.h = 50;
 
+	if (rawname.length() < 6)
+	{
+		textRect.w = 100;
+		textRect.h = 50;
+	}
 	if (rawname.length() < 10)
 	{
 		textRect.w = 200;
@@ -62,8 +67,14 @@ TrackVisualizer::TrackVisualizer(ContentManager* c, SDL_Renderer* r)
 	}
 	if (rawname.length() < 15)
 	{
-		textRect.w = 250;
+		textRect.w = 270;
 		textRect.h = 50;
+	}
+
+	if (artistName.length() < 6)
+	{
+		textRect2.w = 100;
+		textRect2.h = 50;
 	}
 
 	if (artistName.length() < 10)
@@ -74,9 +85,11 @@ TrackVisualizer::TrackVisualizer(ContentManager* c, SDL_Renderer* r)
 
 	if (artistName.length() < 15)
 	{
-		textRect2.w = 250;
+		textRect2.w = 270;
 		textRect2.h = 50;
 	}
+
+	textRect2.x = textRect.x + textRect.w + 20;
 
 	//ACTUAL TRACK POSITION.... POSITION
 	position = new Vector2D(970,80);
@@ -131,7 +144,7 @@ void TrackVisualizer::Update(SDL_DisplayMode window)
 	if (current->getSeconds()!=60)
 		currentSeconds = current->getSeconds() + (current->getMinutes() * 60);
 
-	DEBUG_MSG(current->getSeconds());
+	//DEBUG_MSG(current->getSeconds());
 
 	//std::cout << currentSeconds << std::endl;
 	

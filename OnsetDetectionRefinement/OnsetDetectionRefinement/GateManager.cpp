@@ -66,7 +66,7 @@ void GateManager::Update(Player* player, SDL_DisplayMode window, int finalCombo)
 
 			if (player->playerScore != 0)
 			{
-				player->playerScore -= 100;
+				player->playerScore -= 500;
 				gateCombo=1;
 			}
 				
@@ -79,7 +79,7 @@ void GateManager::Update(Player* player, SDL_DisplayMode window, int finalCombo)
 
 			if (player->playerScore != 0)
 			{
-				player->playerScore -= 100;
+				player->playerScore -= 500;
 				gateCombo=1;
 			}
 				
@@ -94,7 +94,8 @@ void GateManager::Update(Player* player, SDL_DisplayMode window, int finalCombo)
 				gateCombo++;
 		}
 
-
+		if (gateCombo <= 1)
+			finalCombo = 0;
 
 		//Destroy
 		if (gates.at(i)->getX() < -160)
@@ -107,7 +108,9 @@ void GateManager::Update(Player* player, SDL_DisplayMode window, int finalCombo)
 		}
 	}
 
+
 	increase = finalCombo * 50;
+
 
 	lastBeat = BeatDetector::Instance()->getLastBeat();
 }

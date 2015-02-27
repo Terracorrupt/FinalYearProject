@@ -104,7 +104,7 @@ void Game::Update()
 		//Events();
 
 		//Move from Menu to DragMusicFile
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getCurrent() == 2)
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getCurrent() == 2 && SceneManager::Instance()->getActiveScene()->readyToTransition())
 		{
 			SceneManager::Instance()->setCurrent(3);
 		}

@@ -16,6 +16,8 @@ Player::Player(ContentManager* c)
 	position = new Vector2D(100, 300);
 	velocity = new Vector2D(0, 0);
 	playerScore = 0;
+	afterHit = 0;
+	imHit = false;
 }
 
 Player::~Player()
@@ -94,6 +96,12 @@ void Player::Update(SDL_DisplayMode window)
 
 		if (position->m_y > window.h - 150 - height)
 			position->m_y = window.h - 150 - height;
+		
+		if (!imHit)
+			i = SDL_GetTicks();
+
+		if (playerScore < 0)
+			playerScore = 0;
 
 	}
 
@@ -108,8 +116,41 @@ void Player::Update(SDL_DisplayMode window)
 
 void Player::Draw()
 {
+	if (!imHit)
+		conMan->DrawTexture("player", position, SDL_FLIP_NONE);
+	else
+	{
+		//Undraw for a bit, draw for a bit, set back imHit
+		if (SDL_GetTicks() - i > 100 && SDL_GetTicks() - i < 199)
+		{
+			//Nothing
+		}
+		if (SDL_GetTicks() - i > 200 && SDL_GetTicks() - i < 399)
+		{
+			conMan->DrawTexture("player", position, SDL_FLIP_NONE);
+		}
+		if (SDL_GetTicks() - i > 400 && SDL_GetTicks() - i < 499)
+		{
+			
+		}
+		if (SDL_GetTicks() - i > 600 && SDL_GetTicks() - i < 699)
+		{
+			//Nothing
+		}
+		if (SDL_GetTicks() - i > 700 && SDL_GetTicks() - i < 799)
+		{
+			conMan->DrawTexture("player", position, SDL_FLIP_NONE);
+		}
+		if (SDL_GetTicks() - i > 900 && SDL_GetTicks() - i < 999)
+		{
 
-	conMan->DrawTexture("player", position, SDL_FLIP_NONE);
+		}
+		if (SDL_GetTicks() - i > 1000 && SDL_GetTicks() - i < 1099)
+		{
+			imHit = false;
+		}
+		
+	}
 
 	/*if (alive == true)
 	{
@@ -128,12 +169,8 @@ void Player::Draw()
 void Player::getHit()
 {
 	//int i = SDL_GetTicks();
+	imHit = true;
 	//position->m_y += 50;
-
-	//if(SDL_GetTicks() - i > 5000)
-	//{
-		//
-	//}
 
 	//position->m_y -= 50;
 	

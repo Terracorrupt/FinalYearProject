@@ -24,6 +24,6 @@ private:
 	SDL_Rect textRect;
 	SDL_Rect textRect2;
 	bool transition;
-
+	int i;
 };
 #endif

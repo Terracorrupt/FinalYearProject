@@ -2,6 +2,7 @@
 
 Gate::Gate(ContentManager* c, int w)
 {
+	
 	gate1 = new LargeGateObject(c,true);
 	gate2 = new LargeGateObject(c,false);
 

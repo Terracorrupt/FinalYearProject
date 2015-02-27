@@ -32,6 +32,11 @@ Enemy::Enemy(ContentManager* c, SDL_Renderer* r)
 	hover = 0;
 	amount = 0;
 	
+	if (rand() % 20 >= 16)
+		isSpecial = true;
+	else
+		isSpecial = false;
+	speed = 3.0f;
 }
 
 Enemy::~Enemy()
@@ -58,15 +63,17 @@ void Enemy::Load()
 	conMan->LoadTexture("../Textures/enemyTest.png", "enemy", width, height, 1);
 }
 
-void Enemy::Update()
+void Enemy::Update(GameObject* player)
 {
 	if (alive == true)
 	{
-		if (!direction)
+		if (!isSpecial)
 		{
-			position->m_x -= 3;
-			position->m_y -= 2;
-		}
+			if (!direction)
+			{
+				position->m_x -= 3;
+				position->m_y -= 2;
+			}
 		else
 		{
 			position->m_x -= 3;
@@ -82,6 +89,40 @@ void Enemy::Update()
 			lastTick = SDL_GetTicks();
 		}
 
+		}
+		//SPECIAL
+		else
+		{
+			if (speed< 25)
+
+			if (position->m_x > player->position->m_x && position->m_y < player->position->m_y -10)
+			{
+				position->m_x -= speed;
+				position->m_y += speed;
+			}
+			else if (position->m_x > player->position->m_x && position->m_y > player->position->m_y + 10)
+			{
+				position->m_x -= speed;
+				position->m_y -= speed;
+			}
+			else if (position->m_x > player->position->m_x)
+			{
+				position->m_x -= speed;
+			}
+
+			else if (position->m_y < player->position->m_y)
+			{
+				position->m_y += speed;
+			}
+
+			else if (position->m_y > player->position->m_y)
+			{
+				position->m_y -= speed;
+			}
+			speed += 0.05f * 2;
+		}
+
+		
 		deadMillis = SDL_GetTicks();
 	}
 	else

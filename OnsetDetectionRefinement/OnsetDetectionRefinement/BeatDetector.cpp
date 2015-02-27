@@ -384,3 +384,8 @@ TimeStamp* BeatDetector::getCurrentTime()
 {
 	return currentTimeStamp;
 }
+
+TimeStamp* BeatDetector::getSongLength()
+{
+	return new TimeStamp(minutes,seconds,0);
+}

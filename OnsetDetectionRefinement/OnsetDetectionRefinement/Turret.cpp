@@ -27,6 +27,7 @@ Turret::~Turret()
 {
 	delete(conMan->textures["turret"]);
 	delete(conMan->textures["bullet"]);
+	delete bullet;
 }
 
 void Turret::Load()
@@ -77,7 +78,7 @@ void Turret::HandleEvents()
 
 }
 
-void Turret::Update(GameObject* player)
+void Turret::Update(Player* player)
 {
 	position->m_y = player->position->m_y + 28;
 
@@ -85,7 +86,6 @@ void Turret::Update(GameObject* player)
 	{
 
 		bullets.at(i)->Update(mousePos);
-
 
 		if (bullets.at(i)->position->m_x> 1400 || bullets.at(i)->position->m_x < 0)
 			bullets.erase(bullets.begin() + i);
@@ -99,12 +99,56 @@ void Turret::Update(GameObject* player)
 
 	}
 
+	if (player->imHit)
+	{
+		imHit = true;
+	}
+	else
+	{
+		imHit = false;
+		i = SDL_GetTicks();
+	}
+		
+
 	//bullets->Update(position);
 }
 
 void Turret::Draw()
 {
-	conMan->DrawTexture("turret", position, SDL_FLIP_NONE,angle);
+	if (!imHit)
+		conMan->DrawTexture("turret", position, SDL_FLIP_NONE,angle);
+	else
+	{
+		//Undraw for a bit, draw for a bit, set back imHit
+		if (SDL_GetTicks() - i > 100 && SDL_GetTicks() - i < 199)
+		{
+			//Nothing
+		}
+		if (SDL_GetTicks() - i > 200 && SDL_GetTicks() - i < 399)
+		{
+			conMan->DrawTexture("turret", position, SDL_FLIP_NONE);
+		}
+		if (SDL_GetTicks() - i > 400 && SDL_GetTicks() - i < 499)
+		{
+
+		}
+		if (SDL_GetTicks() - i > 600 && SDL_GetTicks() - i < 699)
+		{
+			//Nothing
+		}
+		if (SDL_GetTicks() - i > 700 && SDL_GetTicks() - i < 799)
+		{
+			conMan->DrawTexture("turret", position, SDL_FLIP_NONE);
+		}
+		if (SDL_GetTicks() - i > 900 && SDL_GetTicks() - i < 999)
+		{
+
+		}
+		if (SDL_GetTicks() - i > 1000 && SDL_GetTicks() - i < 1099)
+		{
+			imHit = false;
+		}
+	}
 
 	for (std::size_t i = 0; i < bullets.size(); i++)
 	{

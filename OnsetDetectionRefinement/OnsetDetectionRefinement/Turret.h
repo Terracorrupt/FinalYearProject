@@ -2,6 +2,7 @@
 #define TURRET_H
 
 #include "Bullet.h"
+#include "Player.h"
 
 class Turret : public GameObject
 {
@@ -10,7 +11,7 @@ public:
 	~Turret();
 	void Load();
 	void HandleEvents();
-	void Update(GameObject* g);
+	void Update(Player* g);
 	void Draw();
 	void SetSpawn(Vector2D* spawn);
 	void getHit();
@@ -25,5 +26,7 @@ public:
 	int maxBullets;
 	bool allowedShoot;
 	int lastTickShot;
+	bool imHit;
+	int i;
 };
 #endif

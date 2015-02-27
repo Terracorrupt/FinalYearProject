@@ -43,5 +43,7 @@ private:
 	bool transition;
 	std::string s2;
 	std::string s;
+	Vector2D* parralaxPos1;
+	Vector2D* parralaxPos2;
 };
 #endif
