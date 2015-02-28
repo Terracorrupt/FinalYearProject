@@ -25,6 +25,7 @@ Enemy::Enemy(ContentManager* c, SDL_Renderer* r)
 	green = { 0, 255, 0 };
 	yellow = { 255, 255, 0 };
 	orange = { 255, 165, 0 };
+	pink = { 255, 20, 147 };
 
 	t = new TextRenderer(r, "../Fonts/DIMITRI.ttf", 28);
 
@@ -190,7 +191,7 @@ void Enemy::getHit(int a)
 	else if (a == 250)
 	{
 		t->message = "+250";
-		activeColor = red;
+		activeColor = pink;
 	}
 
 	textTure = t->RenderText(t->message, activeColor);

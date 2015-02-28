@@ -31,6 +31,7 @@ Level::Level(SDL_Renderer* r, ContentManager* c)
 	green = { 0, 255, 0 };
 	yellow = { 255, 255, 0 };
 	orange = { 255, 165, 0 };
+	pink = {255,20,147};
 	activeComboColor = blue;
 
 	t->message = "00000";
@@ -146,7 +147,7 @@ void Level::Update(SDL_DisplayMode window)
 	}
 	else
 	{
-		activeComboColor = red;
+		activeComboColor = pink;
 	}
 		
 	
@@ -200,7 +201,7 @@ void Level::Update(SDL_DisplayMode window)
 	
 	if (trackVis->onePercent < 5)
 	{
-		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + trackVis->onePercent))
+		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + 5))
 		{
 			//Maybe fade out?
 			transition = true;
@@ -209,7 +210,7 @@ void Level::Update(SDL_DisplayMode window)
 	}
 	else
 	{
-		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + 5))
+		if (trackVis->currentSeconds >(trackVis->songLengthInSeconds + trackVis->onePercent))
 		{
 			//Maybe fade out?
 			transition = true;
@@ -292,4 +293,17 @@ bool Level::readyToTransition()
 int Level::getHighScore()
 {
 	return finalScore;
+}
+
+bool Level::transOut()
+{
+	//while (transPos->m_x < 0)
+		//transPos->m_x += 10;
+
+	return true;
+}
+
+bool Level::transIn()
+{
+	return true;
 }

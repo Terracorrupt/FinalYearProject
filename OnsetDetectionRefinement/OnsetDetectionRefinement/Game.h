@@ -38,6 +38,8 @@ private:
 	ContentManager* conMan;
 	SDL_Event* e;
 	SDL_DisplayMode current;
+	bool menuTransTrue, dragTransTrue;
+	int levelWait;
 };
 #endif
 typedef Game TheGame;

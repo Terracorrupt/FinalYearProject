@@ -13,6 +13,8 @@ public:
 	void Event();
 	bool readyToTransition();
 	int getHighScore();
+	bool transOut();
+	bool transIn();
 private:
 	ContentManager * conMan;
 	SDL_Renderer* rend;
@@ -25,5 +27,9 @@ private:
 	SDL_Rect textRect2;
 	bool transition;
 	int i;
+	int transTimer;
+	bool doOnce;
+	bool transOutBool;
+	Vector2D* transPos;
 };
 #endif

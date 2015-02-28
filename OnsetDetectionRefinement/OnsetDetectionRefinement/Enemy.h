@@ -24,7 +24,7 @@ public:
 	bool direction;
 	Vector2D* initialPos;
 	TextRenderer* t;
-	SDL_Color blue, green, red, yellow, orange, white, activeColor;
+	SDL_Color blue, green, red, yellow, orange, white, pink, activeColor;
 	bool areWeDead;
 	int deadMillis;
 	SDL_Rect textRect;

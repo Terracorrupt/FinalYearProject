@@ -13,6 +13,8 @@ public:
 	void Event();
 	bool readyToTransition();
 	int getHighScore();
+	bool transOut();
+	bool transIn();
 private:
 	GateManager* gateManager;
 	EnemyManager* enemyManager;
@@ -33,7 +35,7 @@ private:
 	bool skyTrue;
 	SDL_Texture * textTure;
 	SDL_Texture * textTure2;
-	SDL_Color blue, green, red, yellow, orange, white, activeComboColor;
+	SDL_Color blue, green, red, yellow, orange, white,pink, activeComboColor;
 	SDL_Rect textRect;
 	SDL_Rect textRect2;
 	TrackVisualizer* trackVis;

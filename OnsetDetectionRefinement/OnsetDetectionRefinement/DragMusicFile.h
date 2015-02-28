@@ -13,6 +13,8 @@ public:
 	void Event();
 	bool readyToTransition();
 	int getHighScore();
+	bool transOut();
+	bool transIn();
 private:
 	ContentManager * conMan;
 	SDL_Renderer* rend;
@@ -32,5 +34,10 @@ private:
 	char* path;
 	bool done;
 	bool doOnce;
+	Vector2D * transInPos;
+	int screenWidth;
+	int transOutTimer;
+	bool transOutBool;
+	Vector2D* transOutPos;
 };
 #endif

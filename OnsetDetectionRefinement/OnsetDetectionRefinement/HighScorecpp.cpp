@@ -73,3 +73,16 @@ int HighScoreScreen::getHighScore()
 {
 	return 0;
 }
+
+bool HighScoreScreen::transOut()
+{
+	//while (transPos->m_x < 0)
+	//transPos->m_x += 10;
+
+	return true;
+}
+
+bool HighScoreScreen::transIn()
+{
+	return true;
+}

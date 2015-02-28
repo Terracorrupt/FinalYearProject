@@ -29,6 +29,8 @@ public:
 	virtual void Event() = 0;
 	virtual bool readyToTransition() = 0;
 	virtual int getHighScore() = 0;
+	virtual bool transOut() = 0;
+	virtual bool transIn() = 0;
 	//Mix_Music* music;
 };
 #endif

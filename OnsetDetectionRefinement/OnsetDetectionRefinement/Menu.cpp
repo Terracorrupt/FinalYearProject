@@ -21,6 +21,8 @@ Menu::Menu(SDL_Renderer* r, ContentManager* c)
 
 	transition = false;
 	i = SDL_GetTicks();
+	doOnce = false;
+	transOutBool = false;
 }
 
 Menu::~Menu()
@@ -40,7 +42,14 @@ void Menu::Update(SDL_DisplayMode window)
 	textRect.x = window.w / 2 - 100;
 	textRect.y = window.h / 2 - 100;
 
-	if (SDL_GetTicks() - i > 300)
+	if (!doOnce)
+	{
+		conMan->LoadTexture("../Textures/transitionOut.png", "transOut", window.w*1.5, window.h, 1);
+		transPos = new Vector2D(-(window.w*1.5), 0);
+		doOnce = true;
+	}
+
+	if (SDL_GetTicks() - i > 300 && !transition)
 	{
 		transition = true;
 	}
@@ -49,6 +58,9 @@ void Menu::Update(SDL_DisplayMode window)
 void Menu::Draw()
 {
 	SDL_RenderCopy(rend, textTure, 0, &textRect);
+
+	if (transition)
+		conMan->DrawTexture("transOut", transPos, SDL_FLIP_NONE);
 }
 
 bool Menu::readyToTransition()
@@ -59,4 +71,29 @@ bool Menu::readyToTransition()
 int Menu::getHighScore()
 {
 	return 0;
+}
+
+bool Menu::transOut()
+{
+
+	if (!transOutBool)
+		transTimer = SDL_GetTicks();
+
+	transOutBool = true;
+
+	//int i = SDL_GetTicks();
+
+	if (SDL_GetTicks() - transTimer < 1000)
+	{
+		transPos->m_x += 40;
+		conMan->DrawTexture("transOut", transPos, SDL_FLIP_NONE);
+		return false;
+	}
+		
+	return true;
+}
+
+bool Menu::transIn()
+{
+	return true;
 }

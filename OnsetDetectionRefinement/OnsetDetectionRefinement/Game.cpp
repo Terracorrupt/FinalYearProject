@@ -9,6 +9,8 @@ Game::Game() : m_running(true)
 {
 
 	e = new SDL_Event();
+	menuTransTrue = false;
+	dragTransTrue = false;
 }
 
 Game::~Game()
@@ -103,20 +105,46 @@ void Game::Update()
 		//Have we switched state?
 		//Events();
 
+		if (menuTransTrue)
+		{
+			if (SceneManager::Instance()->getActiveScene()->transOut())
+			{
+				SceneManager::Instance()->setCurrent(3);
+				menuTransTrue = false;
+			}
+				
+		}
+		if (dragTransTrue)
+		{
+			if(SceneManager::Instance()->getActiveScene()->transOut())
+			{
+				SceneManager::Instance()->setCurrent(4);
+				dragTransTrue = false;
+				levelWait = SDL_GetTicks();
+			}
+		}
+
 		//Move from Menu to DragMusicFile
 		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getCurrent() == 2 && SceneManager::Instance()->getActiveScene()->readyToTransition())
 		{
-			SceneManager::Instance()->setCurrent(3);
+
+			menuTransTrue = true;
+			
+			//if(SceneManager::Instance()->getActiveScene()->transOut())
+				//SceneManager::Instance()->setCurrent(3);
+
+			//SceneManager::Instance()->getActiveScene()->transIn();
 		}
 		//Move from DragMusicFile to Level
 		else if (SceneManager::Instance()->getCurrent() == 3 && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && SceneManager::Instance()->getActiveScene()->readyToTransition())
 		{
-			SceneManager::Instance()->setCurrent(4);
+			dragTransTrue = true;
 		}
 		///Move from Level to High Score Screen
 		else if (SceneManager::Instance()->getCurrent() == 4 && SceneManager::Instance()->getActiveScene()->readyToTransition())
 		{
-			SceneManager::Instance()->setCurrent(5);
+			if (SDL_GetTicks()-levelWait > 500)
+				SceneManager::Instance()->setCurrent(5);
 		}
 		//Move from HighScore Screen to Menu (for now)
 		else if (SceneManager::Instance()->getCurrent() == 5 && SceneManager::Instance()->getActiveScene()->readyToTransition() && TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))

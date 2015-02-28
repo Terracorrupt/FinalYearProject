@@ -13,6 +13,8 @@ public:
 	void Event();
 	bool readyToTransition();
 	int getHighScore();
+	bool transOut();
+	bool transIn();
 private:
 	ContentManager * conMan;
 	SDL_Renderer* rend;
